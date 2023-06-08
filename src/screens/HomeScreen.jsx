@@ -1,8 +1,16 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/product';
 
 const HomeScreen = () => {
+    const [products,setProducts] = useState([]);
+    useEffect(() => {
+        const fetchProducts = async () => {
+
+        }
+
+        fetchProducts();
+    },[])
     return (
         <>
             <h1>
