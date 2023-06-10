@@ -2,19 +2,13 @@ import React,{useEffect,useState} from 'react';
 import { useParams, Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button, ListGroupItem } from "react-bootstrap";
 import Rating from "../components/Rating";
+import { useGetProductDetailQuery } from '../slices/productsApiSlice';
 import axios from 'axios';
 
 const ProductScreen = () => {
-    const [product,setProduct] = useState([]);
     const { id: prodId } = useParams()
-    useEffect(() => {
-        const fetchProduct = async () => {
-           const resp = await axios.get(process.env.REACT_APP_API_URL+'/product/'+prodId)
-           setProduct(resp.data.data.product)
-        }
-
-        fetchProduct();
-    },[])
+    const {data:product, isLoading, error} = useGetProductDetailQuery(prodId);
+   
     return (
         <>
             <Link className="btn btn-light my-3 " to='/'>
