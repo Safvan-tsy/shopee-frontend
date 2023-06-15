@@ -17,7 +17,6 @@ const cartSlice = createSlice({
             }else{
                 state.cartItems = [...state.cartItems,item]
             }
-    
            return updateCart(state);
 
         }
