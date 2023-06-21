@@ -1,4 +1,3 @@
-import product from "../components/product";
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
