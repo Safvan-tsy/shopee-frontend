@@ -32,7 +32,7 @@ const RegisterScreen = () => {
         e.preventDefault();
         try {
             const res = await register({ name,email, password, passwordConfirm }).unwrap();
-            dispatch(setCredentials({ ...res.data.user }));
+            dispatch(setCredentials({ ...res}));
             navigate(redirect);
         } catch (err) {
             toast.error(err?.data?.message || err.error);
