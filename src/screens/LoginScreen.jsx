@@ -30,7 +30,7 @@ const LoginScreen = () => {
         e.preventDefault();
         try {
             const res = await login({ email, password }).unwrap();
-            dispatch(setCredentials({ ...res.data.user }));
+            dispatch(setCredentials({ ...res}));
             navigate(redirect);
         } catch (err) {
             toast.error(err?.data?.message || err.error);

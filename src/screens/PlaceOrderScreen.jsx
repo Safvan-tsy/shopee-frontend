@@ -13,6 +13,7 @@ const PlaceOrderScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
+    const token = useSelector((state)=> state.auth.token)
 
     useEffect(() => {
         if (!cart.shippingAddress.address) navigate('/shipping');
@@ -29,7 +30,8 @@ const PlaceOrderScreen = () => {
                 itemsPrice: cart.itemsPrice,
                 shippingPrice: cart.shippingPrice,
                 taxPrice: cart.taxPrice,
-                totalPrice: cart.totalPrice
+                totalPrice: cart.totalPrice,
+                token:token
             }).unwrap();
             dispatch(clearCartItems());
             navigate(`/order/${res.data.order._id}`)
