@@ -5,6 +5,8 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Loader from '../components/Loader';
 import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice';
 import { useSelector } from 'react-redux';
+import CheckoutForm from '../components/StripeForm';
+import Stripe from '../components/Stripe';
 
 const OrderScreen = () => {
     const { id: orderId } = useParams()
@@ -107,6 +109,9 @@ const OrderScreen = () => {
                                             <Col>Total</Col>
                                             <Col>${data.data.order.totalPrice}</Col>
                                         </Row>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                        <Stripe/>
                                     </ListGroup.Item>
                                 </ListGroup>
 
