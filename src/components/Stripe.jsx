@@ -1,25 +1,46 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react';
+import { UseSelector } from 'react-redux/es/hooks/useSelector';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from './StripeForm';
 
-const stripePromise = loadStripe(
-    'pk_test_51NQA0WSBPjsHg7aGTcvYkTtQcG1bV7fzhQgAc3bvY396oijUuLpURxN96w1AtDetguD9Jc9KktX3PUlMgFry2Kob000BvcdoGz'
-    );
 
-const Stripe = () => {
+const Stripe = (props) => {
+  const [stripePromise, setStripePromise] = useState(null)
+  const [clientSecret, setClientSecret] = useState('')
+  const options = {clientSecret: clientSecret,appearance: {/*...*/},};
+  useEffect(() => {
+    const publishableKey = process.env.REACT_APP_STRIPE_KEY
+    setStripePromise(loadStripe(publishableKey))
 
-    const options = {
-        // passing the client secret obtained in step 3
-        clientSecret: '',
-        // Fully customizable with appearance API.
-        appearance: {/*...*/},
-      };
-  
+  },[])
+  console.log('stripePromise',stripePromise)
+
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/orders/secret', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ totalPrice: props.totalPrice }), // Pass totalPrice in the request body
+      });
+
+      const { client_secret } = await response.body
+      setClientSecret(client_secret);
+    };
+
+    fetchClientSecret();
+  }, [props.totalPrice]);
+  console.log('clientSecret',clientSecret)
   return (
-    <Elements stripe={stripePromise} options={options}>
+  <>
+    {clientSecret  && stripePromise &&(
+      <Elements stripe={stripePromise} options={{clientSecret}}>
       <CheckoutForm />
     </Elements>
+    )}
+    </>
   )
 }
 

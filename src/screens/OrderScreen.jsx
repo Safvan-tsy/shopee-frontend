@@ -111,7 +111,7 @@ const OrderScreen = () => {
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                        <Stripe/>
+                                        <Stripe totalPrice={data.data.order.totalPrice}/>
                                     </ListGroup.Item>
                                 </ListGroup>
 
