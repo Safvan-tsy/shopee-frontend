@@ -26,7 +26,7 @@ const Stripe = (props) => {
         body: JSON.stringify({ totalPrice: props.totalPrice }), // Pass totalPrice in the request body
       });
 
-      const { client_secret } = await response.body
+      const { client_secret } = await response.json();
       setClientSecret(client_secret);
     };
 
