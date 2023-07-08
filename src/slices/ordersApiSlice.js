@@ -21,6 +21,24 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                 },
             }),
             keepUnusedDataFor:5
+        }),
+        updateOrderToPaid:builder.mutation({
+            query: (orderId,token) => ({
+                url:`${ORDERS_URL}/${orderId}/pay`,
+                method:'PUT',
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            })
+        }),
+        updateOrderToDelivered:builder.mutation({
+            query: (orderId,token) => ({
+                url:`${ORDERS_URL}/${orderId}/deliver`,
+                method:'PUT',
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            })
         })
     })
 })
