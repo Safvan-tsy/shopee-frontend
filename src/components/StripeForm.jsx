@@ -1,15 +1,23 @@
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "react-bootstrap";
 import Message from "./Message";
-export default function CheckoutForm() {
+import { useUpdateOrderToPaidMutation } from '../slices/ordersApiSlice';
+
+export default function CheckoutForm(props) {
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
+  const token = useSelector((state) => state.auth.token)
+  const { orderId } = props;
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const [updateOrderToPaid, { isLoading, error }] = useUpdateOrderToPaidMutation();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,17 +33,23 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/`,
+        // return_url: `${window.location.origin}/`,
       },
+      redirect: 'if_required'
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
+    if (error?.type === "card_error" || error?.type === "validation_error") {
       setMessage(error.message);
     } else {
       setMessage("An unexpected error occured.");
     }
 
+    if (!error) {
+      await updateOrderToPaid({token,orderId})
+      navigate('/')
+    }
     setIsProcessing(false);
+    
   };
 
   return (
