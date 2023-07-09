@@ -1,20 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import { UseSelector } from 'react-redux/es/hooks/useSelector';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from './StripeForm';
 
-
 const Stripe = (props) => {
   const [stripePromise, setStripePromise] = useState(null)
   const [clientSecret, setClientSecret] = useState('')
+
   const options = {clientSecret: clientSecret,appearance: {/*...*/},};
+
   useEffect(() => {
     const publishableKey = process.env.REACT_APP_STRIPE_KEY
     setStripePromise(loadStripe(publishableKey))
 
   },[])
-  console.log('stripePromise',stripePromise)
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -32,12 +31,11 @@ const Stripe = (props) => {
 
     fetchClientSecret();
   }, [props.totalPrice]);
-  console.log('clientSecret',clientSecret)
   return (
   <>
     {clientSecret  && stripePromise &&(
       <Elements stripe={stripePromise} options={{clientSecret}}>
-      <CheckoutForm />
+      <CheckoutForm orderId={props.orderId}/>
     </Elements>
     )}
     </>
