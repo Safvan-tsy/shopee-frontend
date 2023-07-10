@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { FaTimes ,FaGratipay} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useProfileMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
-
+import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('')
@@ -17,24 +18,25 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  const token = useSelector((state)=> state.auth.token)
-  const [updateProfile,{loading:loadingUpdateProfile}] = useProfileMutation()
-
+  const token = useSelector((state) => state.auth.token)
+  const [updateProfile, { loading: loadingUpdateProfile }] = useProfileMutation()
+  const { data: res, isLoading, error } = useGetMyOrdersQuery(token);
+console.log(res)
   useEffect(() => {
     if (userInfo) {
       setName(userInfo.name);
       setEmail(userInfo.email);
     }
-  }, [userInfo,userInfo.name, userInfo.email])
+  }, [userInfo, userInfo.name, userInfo.email])
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    if(password!==confirmPassword){
+    if (password !== confirmPassword) {
       toast.error('password did not match')
-    }else{
+    } else {
       try {
-        const data = {_id:userInfo._id,name,password, confirmPassword}
-        const res = await updateProfile({data, token}).unwrap();
+        const data = { _id: userInfo._id, name, password, confirmPassword }
+        const res = await updateProfile({ data, token }).unwrap();
         dispatch(setCredentials(res));
         toast.success('Profile updated success')
       } catch (error) {
@@ -87,10 +89,61 @@ const ProfileScreen = () => {
         <Button variant='primary' type='submit' className='my-2'>
           Update
         </Button>
-        {loadingUpdateProfile&&<Loader/>}
+        {loadingUpdateProfile && <Loader />}
       </Form>
     </Col>
     <Col md={9}>
+      <h2>My Orders</h2>
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>
+          {error?.data?.message || error.error}
+        </Message>
+      ) : (
+        <Table striped hover responsive className='table-sm'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>DATE</th>
+              <th>TOTAL</th>
+              <th>PAID</th>
+              <th>DELIVERED</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+  {res.orders.map((order) => {
+    return (
+      <tr key={order._id}>
+        <td>{order._id}</td>
+        <td>{order.createdAt.substring(0, 10)}</td>
+        <td>{order.totalPrice}</td>
+        <td>
+          {order.isPaid ? (
+            <FaGratipay style={{ color: 'green' }}/>
+          ) : (
+            <FaTimes style={{ color: 'red' }} />
+          )}
+        </td>
+        <td>
+          {order.isDelivered ? (
+            <FaGratipay style={{ color: 'green' }}/>
+          ) : (
+            <FaTimes style={{ color: 'red' }} />
+          )}
+        </td>
+        <td>
+          <LinkContainer to={`/order/${order._id}`}>
+            <Button>Details</Button>
+          </LinkContainer>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+        </Table>
+      )}
     </Col>
   </Row>
 }
