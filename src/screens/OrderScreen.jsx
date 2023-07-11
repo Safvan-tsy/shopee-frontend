@@ -3,10 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import Message from '../components/Message';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import Loader from '../components/Loader';
-import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice';
+import { useGetOrderDetailsQuery, useUpdateOrderToDeliveredMutation } from '../slices/ordersApiSlice';
 import { useSelector } from 'react-redux';
 import CheckoutForm from '../components/StripeForm';
 import Stripe from '../components/Stripe';
+import { toast } from 'react-toastify';
 
 const OrderScreen = () => {
     const { id: orderId } = useParams()
@@ -15,9 +16,19 @@ const OrderScreen = () => {
         orderId,
         token
     }
+    const { userInfo } = useSelector((state) => state.auth);
     const { data, refetch, isLoading, error } = useGetOrderDetailsQuery(request)
+    const [updateOrderToDelivered, { isLoading: loadingDeliver }] = useUpdateOrderToDeliveredMutation();
 
-
+    const deliverOrderHandler = async () => {
+        try {
+            await updateOrderToDelivered({ orderId, token });
+            refetch();
+            toast.success('marked as delivered')
+        } catch (error) {
+            toast.error(error?.data?.message || error.message)
+        }
+    }
     return isLoading ? <Loader />
         : error ? <Message variant='danger' >Error</Message>
             : (
@@ -110,9 +121,24 @@ const OrderScreen = () => {
                                             <Col>${data.data.order.totalPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
-                                    <ListGroup.Item>
-                                        <Stripe totalPrice={data.data.order.totalPrice} orderId={orderId}/>
+                                    {userInfo && !userInfo.isAdmin && !data.data.order.isPaid && (
+                                        <ListGroup.Item>
+                                        <Stripe totalPrice={data.data.order.totalPrice} orderId={orderId} />
                                     </ListGroup.Item>
+                                    )}
+                                    {loadingDeliver && <Loader />}
+                                    {userInfo && userInfo.isAdmin &&
+                                        data.data.order.isPaid && !data.data.order.isDelivered && (
+                                            <ListGroup.Item>
+                                                <Button
+                                                    type='button'
+                                                    className='btn btn-block'
+                                                    onClick={deliverOrderHandler}
+                                                >
+                                                    Mark As Delivered
+                                                </Button>
+                                            </ListGroup.Item> 
+                                        )}
                                 </ListGroup>
 
                             </Card>
