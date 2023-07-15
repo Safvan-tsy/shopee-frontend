@@ -16,11 +16,21 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         }),
         createProduct:builder.mutation({
             query:({data,token})=>({
-                url:PRODUCTS_URL,
+                url:`${PRODUCTS_URL}/`,
                 method:'POST',  
                 body:data,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        }),
+        updateProduct:builder.mutation({
+            query:({data, token}) => ({
+                url:`${PRODUCTS_URL}/${data._id}`,
+                method:'PUT',
+                body:data,
                 headers:{
-                    Authorization:`${token}`
+                    Authorization: `Bearer ${token}`
                 }
             })
         })
@@ -28,4 +38,4 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     
 })
 
-export const {useGetProductsQuery , useGetProductDetailQuery, useCreateProductMutation} = productsApiSlice;
+export const {useGetProductsQuery , useGetProductDetailQuery, useCreateProductMutation, useUpdateProductMutation} = productsApiSlice;

@@ -9,7 +9,8 @@ import Loader from '../../components/Loader';
 import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice';
 
 const ProductListScreen = () => {
-
+    
+    const token = useSelector((state) => state.auth.token);
     const { data: res, isLoading, error, refetch } = useGetProductsQuery()
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
 
@@ -17,7 +18,11 @@ const ProductListScreen = () => {
     const createProductHandler = async () => {
         if (window.confirm('Are you sure')) {
             try {
-                const data = {}
+                const data = {
+                    name:'new product',
+                    description:'type description here',
+                    price: 0
+                }
                 await createProduct({ data, token })
                 refetch()
             } catch (error) {
