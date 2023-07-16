@@ -7,12 +7,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             query:()=> ({
                 url:PRODUCTS_URL,
             }),
-            keepUnusedDataFor:5
+            keepUnusedDataFor:5,
+            providesTags:['products']
         }),
         getProductDetail:builder.query({
             query:(productId) => ({
                 url:`${PRODUCTS_URL}/${productId}`,
-            })
+            }),
+            providesTags:['products']
         }),
         createProduct:builder.mutation({
             query:({data,token})=>({
@@ -22,17 +24,19 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            })
+            }),
+            invalidatesTags:['products']
         }),
         updateProduct:builder.mutation({
             query:({data, token}) => ({
-                url:`${PRODUCTS_URL}/${data._id}`,
+                url:`${PRODUCTS_URL}/${data.prodId}`,
                 method:'PUT',
                 body:data,
                 headers:{
                     Authorization: `Bearer ${token}`
                 }
-            })
+            }),
+            invalidatesTags:['products']
         })
     })
     
