@@ -37,9 +37,20 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 }
             }),
             invalidatesTags:['products']
+        }),
+        uploadProdImage:builder.mutation({
+            query:({formData,token}) => ({
+                url:`${PRODUCTS_URL}/image`,
+                method:'POST',
+                body:formData,
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+
+            })
         })
     })
     
 })
 
-export const {useGetProductsQuery , useGetProductDetailQuery, useCreateProductMutation, useUpdateProductMutation} = productsApiSlice;
+export const {useGetProductsQuery , useUploadProdImageMutation,useGetProductDetailQuery, useCreateProductMutation, useUpdateProductMutation} = productsApiSlice;

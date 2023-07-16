@@ -6,7 +6,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
 import { toast } from 'react-toastify';
-import { useUpdateProductMutation, useGetProductDetailQuery } from '../../slices/productsApiSlice';
+import { useUploadProdImageMutation, useUpdateProductMutation, useGetProductDetailQuery } from '../../slices/productsApiSlice';
 
 const ProductEditScreen = () => {
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ const ProductEditScreen = () => {
 
     const { data: product, isLoading, refetch } = useGetProductDetailQuery(prodId);
     const [updateProduct, { isloading: loadingUpdate, error }] = useUpdateProductMutation();
+    const [uploadProdImage, { isLoading: loadingUpload }] = useUploadProdImageMutation();
 
     useEffect(() => {
         if (product) {
@@ -58,6 +59,19 @@ const ProductEditScreen = () => {
             toast.success('Update success');
             navigate('/admin/productlist');
         }
+    };
+    const uploadFileHandler = async (e) => {
+        const formData = new FormData();
+        formData.append('imageCover', e.target.files[0])
+        try {
+            console.log(formData)
+            const res = await uploadProdImage({ formData, token }).unwrap()
+            toast.success('success')
+            setImage(res.image)
+        } catch (error) {
+            toast.error(error?.data?.message || error.error);
+        }
+
     }
     return <>
         <Link to='/admin/productlist' className='btn btn-light my-3'>
@@ -93,7 +107,19 @@ const ProductEditScreen = () => {
 
                                 </Form.Control>
                             </Form.Group>
-                            {/* image input */}
+                            <Form.Group controlId='image' className='my-2'>
+                                <Form.Label>Image</Form.Label>
+                                <Form.Control type='text'
+                                    placeholder='upload Image'
+                                    value={image} 
+                                >
+                                </Form.Control>
+                                <Form.Control
+                                    type='file'
+                                    label='choose file'
+                                    onChange={uploadFileHandler}
+                                ></Form.Control>
+                            </Form.Group>
                             <Form.Group controlId='brand' className='my-2'>
                                 <Form.Label>Brand</Form.Label>
                                 <Form.Control
