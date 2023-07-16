@@ -2,44 +2,71 @@ import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
-    endpoints:(builder)=>({
-        getProducts:builder.query({
-            query:()=> ({
-                url:PRODUCTS_URL,
+    endpoints: (builder) => ({
+        getProducts: builder.query({
+            query: () => ({
+                url: PRODUCTS_URL,
             }),
-            keepUnusedDataFor:5,
-            providesTags:['products']
+            keepUnusedDataFor: 5,
+            providesTags: ['products']
         }),
-        getProductDetail:builder.query({
-            query:(productId) => ({
-                url:`${PRODUCTS_URL}/${productId}`,
+        getProductDetail: builder.query({
+            query: (productId) => ({
+                url: `${PRODUCTS_URL}/${productId}`,
             }),
-            providesTags:['products']
+            providesTags: ['products']
         }),
-        createProduct:builder.mutation({
-            query:({data,token})=>({
-                url:`${PRODUCTS_URL}/`,
-                method:'POST',  
-                body:data,
+        createProduct: builder.mutation({
+            query: ({ data, token }) => ({
+                url: `${PRODUCTS_URL}/`,
+                method: 'POST',
+                body: data,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }),
-            invalidatesTags:['products']
+            invalidatesTags: ['products']
         }),
-        updateProduct:builder.mutation({
-            query:({data, token}) => ({
-                url:`${PRODUCTS_URL}/${data.prodId}`,
-                method:'PUT',
-                body:data,
-                headers:{
+        updateProduct: builder.mutation({
+            query: ({ data, token }) => ({
+                url: `${PRODUCTS_URL}/${data.prodId}`,
+                method: 'PUT',
+                body: data,
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             }),
-            invalidatesTags:['products']
+            invalidatesTags: ['products']
+        }),
+        uploadProdImage: builder.mutation({
+            query: ({ formData, token }) => ({
+                url: `${PRODUCTS_URL}/image`,
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+
+            })
+        }),
+        deleteProduct: builder.mutation({
+            query: ({ prodId, token }) => ({
+                url: `${PRODUCTS_URL}/${prodId}`,
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
         })
     })
-    
+
 })
 
-export const {useGetProductsQuery , useGetProductDetailQuery, useCreateProductMutation, useUpdateProductMutation} = productsApiSlice;
+export const {
+    useGetProductsQuery,
+    useUploadProdImageMutation,
+    useGetProductDetailQuery,
+    useCreateProductMutation,
+    useUpdateProductMutation,
+    useDeleteProductMutation
+} = productsApiSlice;
