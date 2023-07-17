@@ -1,24 +1,28 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { useGetProductsQuery, useCreateProductMutation , useDeleteProductMutation} from '../../slices/productsApiSlice';
+import {
+    useGetProductsQuery,
+    useCreateProductMutation,
+    useDeleteProductMutation
+} from '../../slices/productsApiSlice';
 
 const ProductListScreen = () => {
-    
+
     const token = useSelector((state) => state.auth.token);
     const { data: res, isLoading, error, refetch } = useGetProductsQuery()
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
-    const [deleteProduct, {isLoading:loadingDelete}] = useDeleteProductMutation()
+    const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation()
 
-    const deleteHandler = async(prodId) => {
-        if(window.confirm('Are you sure')){
+    const deleteHandler = async (prodId) => {
+        if (window.confirm('Are you sure')) {
             try {
-                await deleteProduct({prodId,token})
+                await deleteProduct({ prodId, token })
                 toast.success('Deleted')
                 refetch()
             } catch (error) {
@@ -30,8 +34,8 @@ const ProductListScreen = () => {
         if (window.confirm('Are you sure')) {
             try {
                 const data = {
-                    name:'new product',
-                    description:'type description here',
+                    name: 'new product',
+                    description: 'type description here',
                     price: 0
                 }
                 await createProduct({ data, token })
