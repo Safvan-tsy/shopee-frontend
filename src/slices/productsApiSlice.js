@@ -57,6 +57,23 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                     Authorization: `Bearer ${token}`
                 }
             })
+        }),
+        createReview: builder.mutation({
+            query: ({ data, token }) => ({
+                url: `${PRODUCTS_URL}/${data.prodId}/review`,
+                method: 'POST',
+                body: data,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }),
+            invalidatesTags: ['Products'],
+        }),
+        getReviews: builder.query({
+            query: (prodId) => ({
+                url: `${PRODUCTS_URL}/${prodId}/review`,
+            }),
+            providesTags: ['products']
         })
     })
 
@@ -68,5 +85,7 @@ export const {
     useGetProductDetailQuery,
     useCreateProductMutation,
     useUpdateProductMutation,
-    useDeleteProductMutation
+    useDeleteProductMutation,
+    useCreateReviewMutation,
+    useGetReviewsQuery
 } = productsApiSlice;
