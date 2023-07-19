@@ -1,4 +1,4 @@
-import { USERS_URL } from "../constants";
+import { ORDERS_URL, USERS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -51,6 +51,26 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                     Authorization: `Bearer ${token}`
                 },
             })
+        }),
+        getUserDetails:builder.query({
+            query:({userId,token})=>({
+                url:`${USERS_URL}/${userId}`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                keepUnusedDataFor:5
+            })
+        }),
+        updateUser:builder.mutation({
+            query:({data,token})=>({
+                url:`${USERS_URL}/${data.userId}`,
+                method:'PUT',
+                body:data,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            }),
+            invalidatesTags:['Users']
         })
 
     })
@@ -62,5 +82,7 @@ export const {
     useRegisterMutation,
     useProfileMutation,
     useGetAllUsersQuery,
-    useDeleteUserMutation
+    useDeleteUserMutation,
+    useGetUserDetailsQuery,
+    useUpdateUserMutation
 } = usersApiSlice;
