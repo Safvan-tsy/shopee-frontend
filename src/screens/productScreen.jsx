@@ -134,7 +134,7 @@ const ProductScreen = () => {
                         <Col md={6}>
                             {loadingReview && <Loader />}
                             <h2>Reviews</h2>
-                            {res.reviews && <Message>No Reviews</Message>}
+                            {!res.reviews && <Message>No Reviews</Message>}
                             <ListGroup variant="flush">
                                 {res.reviews.map(review => (
                                     <ListGroup.Item>

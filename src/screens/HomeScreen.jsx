@@ -1,11 +1,13 @@
 import { Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import Product from '../components/product';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 const HomeScreen = () => {
-    const {data:products, isLoading, error}  = useGetProductsQuery();
+    const {page,limit} = useParams()
+    const {data:products, isLoading, error}  = useGetProductsQuery({page,limit});
 
     return (
         <>
