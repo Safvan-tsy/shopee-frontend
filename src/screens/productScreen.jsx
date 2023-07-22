@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { addToCart } from '../slices/cartSlice';
+import Meta from "../components/Meta";
 
 const ProductScreen = () => {
     const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const ProductScreen = () => {
                 </Message>
             ) : (
                 <>
+                    <Meta title={product.data.product.name} />
                     <Row>
                         <Col md={5}>
                             <Image src={product.data.product.image} alt={product.data.product.name} fluid />
