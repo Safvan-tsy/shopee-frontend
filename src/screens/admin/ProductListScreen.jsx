@@ -1,9 +1,11 @@
 import React from 'react';
+import { useParams } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Table, Button, Row, Col } from 'react-bootstrap';
-import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
+import Paginate from '../../components/Paginate';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import {
@@ -15,7 +17,9 @@ import {
 const ProductListScreen = () => {
 
     const token = useSelector((state) => state.auth.token);
-    const { data: res, isLoading, error, refetch } = useGetProductsQuery()
+    const {page} = useParams()
+
+    const { data: res, isLoading, error, refetch } = useGetProductsQuery({page})
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
     const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation()
 
@@ -97,6 +101,7 @@ const ProductListScreen = () => {
                                 ))}
                             </tbody>
                         </Table>
+                        <Paginate pages={res.pages} page={res.page} isAdmin={true}/>
                     </>
                 )}
     </>
