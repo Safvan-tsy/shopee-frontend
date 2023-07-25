@@ -1,9 +1,10 @@
 import { PRODUCTS_URL } from "../utils/constants";
 import { apiSlice } from "./apiSlice";
+import { ProductType } from "../types/product.types";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query<{ products: any[] }, { page: number; keyword: string }>({
+    getProducts: builder.query<{data:{products:ProductType[]},pages:number,page:number }, { page: number; keyword: string }>({
       query: ({ page, keyword }) => ({
         url: PRODUCTS_URL,
         params: { page, keyword },
@@ -11,7 +12,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
       providesTags: ['Product'],
     }),
-    getProductDetail: builder.query<{ product: any }, string>({
+    getProductDetail: builder.query<{ product: ProductType }, string>({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
       }),
@@ -75,7 +76,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ['Product'],
     }),
-    getTopProducts: builder.query<{ topProducts: any[] }, void>({
+    getTopProducts: builder.query<{ products: ProductType[] }, void>({
       query: () => ({
         url: `${PRODUCTS_URL}/top`,
       }),

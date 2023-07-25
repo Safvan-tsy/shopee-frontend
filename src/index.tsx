@@ -8,11 +8,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import HomeScreen from './screens/HomeScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
-
+      <Route index={true} path='/' element={<HomeScreen />} />
+      <Route path='/search/:keyword' element={<HomeScreen />} />
+      <Route path='/page/:page' element={<HomeScreen />} />
+      <Route path='/search/:keyword/page/:page' element={<HomeScreen />} />
     </Route>
   )
 )
