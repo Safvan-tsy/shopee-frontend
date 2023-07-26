@@ -7,3 +7,10 @@ export interface State {
         token?:string
     }
 }
+
+export interface LoginResponse {
+    data:{
+        user:User
+    };
+    token: string
+ }

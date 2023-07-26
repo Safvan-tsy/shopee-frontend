@@ -9,6 +9,9 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ProductScreen from './screens/ProductScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +20,11 @@ const router = createBrowserRouter(
       <Route path='/search/:keyword' element={<HomeScreen />} />
       <Route path='/page/:page' element={<HomeScreen />} />
       <Route path='/search/:keyword/page/:page' element={<HomeScreen />} />
+      <Route path='/product/:id' element={<ProductScreen />} />
+      <Route path='/login' element={<LoginScreen />} />
+      <Route path='/register' element={<RegisterScreen />} />
+      {/* <Route path='/cart' element={<CartScreen />} /> */}
+
     </Route>
   )
 )

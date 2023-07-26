@@ -1,16 +1,18 @@
 import { USERS_URL } from "../utils/constants";
 import { apiSlice } from "./apiSlice";
+import { User } from "../types/user.types";
+import { LoginResponse } from "../types/state.types";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<{ token: string }, { data: any }>({
+    login: builder.mutation<{ data:{user:User},token: string }, { email:string ,password:string}>({
       query: (data) => ({
         url: `${USERS_URL}/login`,
         method: 'POST',
         body: data,
       }),
     }),
-    register: builder.mutation<void, { data: any }>({
+    register: builder.mutation<{data:{user:User},token: string }, { name:string,email:string,password:string,passwordConfirm:string }>({
       query: (data) => ({
         url: `${USERS_URL}/signup`,
         method: 'POST',
