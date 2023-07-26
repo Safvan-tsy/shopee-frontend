@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../../slices/usersApiSlice';
 import { logout } from '../../slices/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { RootState } from '../../store';
 // import SearchBox from './SearchBox';
 
 const Header: React.FC = () => {
@@ -85,13 +86,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
-// Define RootState type to use in useSelector
-interface RootState {
-  cart: {
-    cartItems: any[]; // Replace 'any[]' with the actual type of cart items
-  };
-  auth: {
-    userInfo: any; // Replace 'any' with the actual type of userInfo
-  };
-}

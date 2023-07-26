@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { updateCart } from '../utils/cartUtils';
-
-interface CartItem {
-  _id: string;
-  // Add other properties of the cart item here
-}
+import { CartItem } from '../types/product.types';
 
 interface CartState {
   cartItems: CartItem[];

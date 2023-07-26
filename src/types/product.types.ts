@@ -5,3 +5,13 @@ export interface ProductType {
     price:number;
 
 }
+
+
+export interface CartItem {
+    _id:string;
+    name:string;
+    price:number;
+    qty:number;
+    image?:string;
+  }
+  
