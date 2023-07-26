@@ -12,6 +12,12 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProductScreen from './screens/ProductScreen';
+import { SellerRoute } from './components/route/SellerRoute';
+import OrderListScreen from './screens/seller/OrderListScreen';
+import ProductListScreen from './screens/seller/ProductListScreen';
+import ProductEditScreen from './screens/seller/ProductEditScreen';
+import UserEditScreen from './screens/seller/UserEditScreen';
+import UserListScreen from './screens/seller/UserListScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,7 +30,15 @@ const router = createBrowserRouter(
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
       {/* <Route path='/cart' element={<CartScreen />} /> */}
-
+      
+      <Route path='' element={<SellerRoute />}>
+        <Route path='/admin/orderlist' element={<OrderListScreen/>} />
+        <Route path='/admin/productlist' element={<ProductListScreen />} />
+        <Route path='/admin/productlist/:page' element={<ProductListScreen />} />
+        <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+        <Route path='/admin/userlist' element={<UserListScreen />} />
+        <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+      </Route>
     </Route>
   )
 )

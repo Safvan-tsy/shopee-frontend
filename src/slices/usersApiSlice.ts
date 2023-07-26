@@ -54,7 +54,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
-    getUserDetails: builder.query<{ user: any }, { userId: string; token: string }>({
+    getUserDetails: builder.query<{ user: User }, { userId: string; token: string }>({
       query: ({ userId, token }) => ({
         url: `${USERS_URL}/${userId}`,
         headers: {
@@ -63,7 +63,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         keepUnusedDataFor: 5,
       }),
     }),
-    updateUser: builder.mutation<void, { data: any; token: string }>({
+    updateUser: builder.mutation<{ data:{user:User}; token: string },{data:{userId:string,name:string,email:string,isAdmin:boolean},token:string}>({
       query: ({ data, token }) => ({
         url: `${USERS_URL}/${data.userId}`,
         method: 'PUT',

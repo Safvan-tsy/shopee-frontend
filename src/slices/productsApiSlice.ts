@@ -4,7 +4,7 @@ import { ProductType } from "../types/product.types";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query<{data:{products:ProductType[]},pages:number,page:number }, { page: number; keyword: string }>({
+    getProducts: builder.query<{data:{products:ProductType[]},pages:number,page:number }, { page:string; keyword: string }>({
       query: ({ page, keyword }) => ({
         url: PRODUCTS_URL,
         params: { page, keyword },
@@ -40,7 +40,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Product'],
     }),
-    uploadProdImage: builder.mutation<void, { formData: FormData; token: string }>({
+    uploadProdImage: builder.mutation<{image:string}, { formData: FormData; token: string }>({
       query: ({ formData, token }) => ({
         url: `${PRODUCTS_URL}/image`,
         method: 'POST',

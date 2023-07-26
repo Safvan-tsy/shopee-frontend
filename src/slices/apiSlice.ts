@@ -4,7 +4,7 @@ import { BASE_URL } from "../utils/constants";
 type BaseQuery = BaseQueryFn<FetchArgs>;
 const baseQuery: BaseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 type TagTypes = 'Product' | 'Order' | 'User';
-type EndpointsBuilder = Parameters<typeof createApi>[0]['endpoints'];
+export type EndpointsBuilder = Parameters<typeof createApi>[0]['endpoints'];
 
 // // Create the endpoints object (update this with your actual endpoint definitions)
 // const endpoints: EndpointsBuilder = (builder) => ({

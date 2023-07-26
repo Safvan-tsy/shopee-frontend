@@ -10,7 +10,7 @@ import { ProductType } from '../types/product.types';
 
 const HomeScreen = () => {
     const { page, keyword } = useParams<{ page?: string; keyword?: string }>();
-    const { data: products, isLoading, error } = useGetProductsQuery({page: Number(page) ?? 1, keyword: keyword ?? '',});
+    const { data: products, isLoading, error } = useGetProductsQuery({page: page ?? '1', keyword: keyword ?? '',});
 
     return (
         <>

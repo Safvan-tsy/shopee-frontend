@@ -7,6 +7,8 @@ export interface ProductType {
     description:string;
     numReviews:number;
     countInStock:number;
+    brand:string;
+    category:string;
 }
 
 
