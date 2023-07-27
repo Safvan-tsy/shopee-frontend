@@ -1,7 +1,6 @@
 import { USERS_URL } from "../utils/constants";
 import { apiSlice } from "./apiSlice";
 import { User } from "../types/user.types";
-import { LoginResponse } from "../types/state.types";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,7 +24,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
-    profile: builder.mutation<void, { data: any; token: string }>({
+    profile: builder.mutation<{ data:{user:User}; token: string }, { data: any; token: string }>({
       query: ({ data, token }) => ({
         url: `${USERS_URL}/profile`,
         method: 'PUT',

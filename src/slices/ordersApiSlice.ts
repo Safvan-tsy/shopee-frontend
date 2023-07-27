@@ -1,9 +1,19 @@
 import { apiSlice } from './apiSlice';
 import { ORDERS_URL } from '../utils/constants';
+import { CartItem, orderType } from '../types/product.types';
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createOrder: builder.mutation<void, {token: string; order: any }>({
+    createOrder: builder.mutation<{data:{order:orderType}}, { 
+      orderItems: CartItem[]; 
+      shippingAddress: any; 
+      paymentMethod: string; 
+      itemsPrice: string; 
+      shippingPrice: string; 
+      taxPrice: string; 
+      totalPrice: string; 
+      token: string; 
+  }>({
       query: (order) => ({
         url: ORDERS_URL,
         method: 'POST',
@@ -14,7 +24,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getOrderDetails: builder.query<{ order: any }, { orderId: string; token: string }>({
+    getOrderDetails: builder.query<{ data:{order:orderType} }, { orderId: string; token: string }>({
       query: ({ orderId, token }) => ({
         url: `${ORDERS_URL}/${orderId}`,
         headers: {
@@ -44,7 +54,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getMyOrders: builder.query<{ orders: any[] }, string>({
+    getMyOrders: builder.query<{ orders: orderType[] }, string>({
       query: (token) => ({
         url: `${ORDERS_URL}/mine`,
         headers: {

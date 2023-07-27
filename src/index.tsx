@@ -13,11 +13,18 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProductScreen from './screens/ProductScreen';
 import { SellerRoute } from './components/route/SellerRoute';
+import { PrivateRoute } from './components/route/UserRoute';
 import OrderListScreen from './screens/seller/OrderListScreen';
 import ProductListScreen from './screens/seller/ProductListScreen';
 import ProductEditScreen from './screens/seller/ProductEditScreen';
 import UserEditScreen from './screens/seller/UserEditScreen';
 import UserListScreen from './screens/seller/UserListScreen';
+import CartScreen from './screens/CartScreen';
+import ShippingScreen from './screens/user/ShippingScreen';
+import PaymentScreen from './screens/user/PaymentScreen';
+import PlaceOrderScreen from './screens/user/PlaceOrderScreen';
+import OrderScreen from './screens/user/OrderScreen';
+import ProfileScreen from './screens/user/ProfileScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,10 +36,18 @@ const router = createBrowserRouter(
       <Route path='/product/:id' element={<ProductScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
-      {/* <Route path='/cart' element={<CartScreen />} /> */}
-      
+      <Route path='/cart' element={<CartScreen />} />
+
+      <Route path='' element={<PrivateRoute />} >
+        <Route path='/shipping' element={<ShippingScreen />} />
+        <Route path='/payment' element={<PaymentScreen />} />
+        <Route path='/placeorder' element={<PlaceOrderScreen />} />
+        <Route path='/order/:id' element={<OrderScreen />} />
+        <Route path='/profile' element={<ProfileScreen />} />
+      </Route>
+
       <Route path='' element={<SellerRoute />}>
-        <Route path='/admin/orderlist' element={<OrderListScreen/>} />
+        <Route path='/admin/orderlist' element={<OrderListScreen />} />
         <Route path='/admin/productlist' element={<ProductListScreen />} />
         <Route path='/admin/productlist/:page' element={<ProductListScreen />} />
         <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />

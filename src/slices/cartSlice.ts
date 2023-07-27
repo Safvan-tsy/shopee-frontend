@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { updateCart } from '../utils/cartUtils';
 import { CartItem } from '../types/product.types';
+import { CartState } from '../types/state.types';
 
-interface CartState {
-  cartItems: CartItem[];
-  shippingAddress: any; // Update this with the type of shippingAddress if known
-  paymentMethod: string;
-}
 
 const initialState: CartState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
