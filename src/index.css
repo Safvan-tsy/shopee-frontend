@@ -1,3 +1,17 @@
+/* :root {
+  --body_background: white;
+  --body_color: black;
+}
+
+[data-theme='dark'] {
+  --body_background: #282c34;
+  --body_color: white;
+}
+
+* {
+  transition: all 0.3 ease-in-out;
+} */
+
 main {
   min-height: 80vh;
 }

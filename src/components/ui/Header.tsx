@@ -8,7 +8,8 @@ import { useLogoutMutation } from '../../slices/usersApiSlice';
 import { logout } from '../../slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
-// import SearchBox from './SearchBox';
+import SearchBox from './SearchBox';
+// import DarkMode from '../DarkMode/DarkMode';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,10 +37,11 @@ const Header: React.FC = () => {
               <img src={logo} alt="Logo" /> Shopee
             </Navbar.Brand>
           </LinkContainer>
+          {/* <DarkMode/> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              {/* <SearchBox/> */}
+              <SearchBox/>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart
