@@ -16,8 +16,8 @@ const ProductScreen = () => {
     const navigate = useNavigate();
 
     const { id: prodId } = useParams()
-    const token = useSelector((state:RootState) => state.auth.token);
-    const { userInfo } = useSelector((state:RootState) => state.auth);
+    const token = useSelector((state: RootState) => state.auth.token);
+    const { userInfo } = useSelector((state: RootState) => state.auth);
 
     const [qty, setQty] = useState(1);
     const [rating, setRating] = useState(0);

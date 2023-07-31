@@ -13,12 +13,12 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
-    const [passwordConfirm , setPasswordConfirm ] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [register, { isLoading }] = useRegisterMutation();
-    const { userInfo } = useSelector((state:RootState) => state.auth);
+    const { userInfo } = useSelector((state: RootState) => state.auth);
     const { search } = useLocation();
     const sp = new URLSearchParams(search);
     const redirect = sp.get('redirect') || '/';
@@ -32,8 +32,8 @@ const RegisterScreen = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await register({ name,email, password, passwordConfirm }).unwrap();
-            dispatch(setCredentials({ ...res}));
+            const res = await register({ name, email, password, passwordConfirm }).unwrap();
+            dispatch(setCredentials({ ...res }));
             navigate(redirect);
         } catch (err) {
             toast.error('err');
@@ -45,7 +45,7 @@ const RegisterScreen = () => {
             <h1>Sign Up</h1>
             <Form onSubmit={submitHandler}>
 
-            <Form.Group className='my-3' controlId='name'>
+                <Form.Group className='my-3' controlId='name'>
                     <Form.Label>Full name</Form.Label>
                     <Form.Control type='text'
                         placeholder="enter name"
@@ -93,7 +93,7 @@ const RegisterScreen = () => {
                     Already user? &nbsp;
                     <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                         Login
-                        </Link>
+                    </Link>
                 </Col>
             </Row>
 
