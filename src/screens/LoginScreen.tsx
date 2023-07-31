@@ -16,7 +16,7 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [login, { isLoading }] = useLoginMutation();
-    const { userInfo } = useSelector((state:RootState) => state.auth);
+    const { userInfo } = useSelector((state: RootState) => state.auth);
     const { search } = useLocation();
     const sp = new URLSearchParams(search);
     const redirect = sp.get('redirect') || '/';
@@ -31,7 +31,7 @@ const LoginScreen = () => {
         e.preventDefault();
         try {
             const res = await login({ email, password }).unwrap();
-            dispatch(setCredentials({ ...res}));
+            dispatch(setCredentials({ ...res }));
             navigate(redirect);
         } catch (err) {
             toast.error('Failed to login.Email or Password incorrect');
