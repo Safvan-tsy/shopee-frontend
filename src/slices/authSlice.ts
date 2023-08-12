@@ -4,6 +4,7 @@ import { User } from '../types/user.types';
 interface AuthState {
   userInfo: User | null;
   token: string | null;
+  sellerInfo?: any|null
 }
 
 const initialState: AuthState = {
