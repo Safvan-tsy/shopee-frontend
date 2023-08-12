@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../../components/ui/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../components/ui/Loader';
-import { useRegisterMutation } from '../../slices/usersApiSlice';
+import { useRegistrationMutation } from '../../slices/sellersApiSlice';
 import { toast } from 'react-toastify';
 import { setCredentials } from '../../slices/authSlice';
 import { RootState } from '../../store';
@@ -17,7 +17,7 @@ const RegistrationScreen = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [register, { isLoading }] = useRegisterMutation();
+    const [registration, { isLoading }] = useRegistrationMutation();
     const { userInfo } = useSelector((state: RootState) => state.auth);
     const { search } = useLocation();
     const sp = new URLSearchParams(search);
