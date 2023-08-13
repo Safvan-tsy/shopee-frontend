@@ -28,6 +28,8 @@ import ProfileScreen from './screens/user/ProfileScreen';
 import RegistrationScreen from './screens/seller/RegistrationScreen';
 import { AdminRoute } from './components/route/AdminRoute';
 import DashboardScreen from './screens/seller/DashboardScreen';
+import SettingsScreen from './screens/seller/SettingsScreen';
+import WalletScreen from './screens/seller/WalletScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -61,6 +63,8 @@ const router = createBrowserRouter(
 
       <Route path='' element={<SellerRoute />}>
         <Route path='/seller/dashboard' element={<DashboardScreen/>} />
+        <Route path='/seller/wallet' element={<WalletScreen/>} />
+        <Route path='/seller/settings' element={<SettingsScreen/>} />
       </Route>
 
     </Route>

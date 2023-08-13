@@ -6,7 +6,7 @@ export const sellersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
     registration: builder.mutation<{ data: { user: User, seller: Seller }, token: string }, { data: any; token: string }>({
-      query: ({data,token}) => ({
+      query: ({ data, token }) => ({
         url: `${SELLERS_URL}/register`,
         method: 'POST',
         body: data,
