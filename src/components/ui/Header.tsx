@@ -17,6 +17,7 @@ const Header: React.FC = () => {
   const [logoutApiCall] = useLogoutMutation();
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { sellerInfo } = useSelector((state: RootState) => state.auth);
 
   const logoutHandler = async () => {
     try {
@@ -27,6 +28,7 @@ const Header: React.FC = () => {
       console.log(error);
     }
   };
+  const handleSellerLogin = () => { }
 
   return (
     <header>
@@ -41,7 +43,7 @@ const Header: React.FC = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <SearchBox/>
+              <SearchBox />
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart
@@ -57,6 +59,15 @@ const Header: React.FC = () => {
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
+                  {!userInfo.isSeller ? (
+                    <LinkContainer to="/seller/register">
+                      <NavDropdown.Item>Become A Seller</NavDropdown.Item>
+                    </LinkContainer>
+                  ) : (
+                    <LinkContainer to="/seller/dashboard">
+                      <NavDropdown.Item>Seller Dashboard</NavDropdown.Item>
+                    </LinkContainer>
+                  )}
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
@@ -79,6 +90,20 @@ const Header: React.FC = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
+              {sellerInfo && (
+                <NavDropdown title="Seller Zone" id="adminuser">
+                  <LinkContainer to="/seller/dashboard">
+                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/seller/wallet">
+                    <NavDropdown.Item>wallet</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/seller/settings">
+                    <NavDropdown.Item>Settings</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              ) 
+            } 
             </Nav>
           </Navbar.Collapse>
         </Container>
