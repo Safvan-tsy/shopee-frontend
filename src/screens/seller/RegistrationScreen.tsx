@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../../components/ui/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,24 +13,30 @@ const RegistrationScreen = () => {
     const [pan, setPan] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [DisplayName, setDisplayName] = useState('');
+    const [displayName, setDisplayName] = useState('');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [registration, { isLoading }] = useRegistrationMutation();
     const { userInfo } = useSelector((state: RootState) => state.auth);
-    const { search } = useLocation();
-    const sp = new URLSearchParams(search);
-    const redirect = sp.get('redirect') || '/';
+    const { token } = useSelector((state: RootState) => state.auth);
 
-    useEffect(() => { }, []);
+    useEffect(() => {
+        if (userInfo.isSeller) {
+            navigate('/seller/dashboard');
+        }
+    }, [navigate, userInfo]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-
+            const data = { pan, phone, password, displayName }
+            const res = await registration({ data, token }).unwrap();
+            dispatch(setCredentials({ ...res }));
+            navigate('/seller/dashboard')
         } catch (err) {
-            toast.error('err');
+            console.log(err)
+            toast.error("err")
         }
     };
     return (
@@ -55,7 +61,7 @@ const RegistrationScreen = () => {
                 <Form.Group className='my-3' controlId='name'>
                     <Form.Label>Display name</Form.Label>
                     <Form.Control type='text'
-                        value={DisplayName}
+                        value={displayName}
                         placeholder='Enter the seller name you want to display'
                         onChange={(e) => setDisplayName(e.target.value)}>
                     </Form.Control>

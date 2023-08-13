@@ -5,11 +5,14 @@ import { Seller, User } from "../types/user.types";
 export const sellersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    registration: builder.mutation<{ data: { user: User, seller: Seller }, token: string }, { pan: string, phone: string, password: string, displayName: string }>({
-      query: (data) => ({
+    registration: builder.mutation<{ data: { user: User, seller: Seller }, token: string }, { data: any; token: string }>({
+      query: ({data,token}) => ({
         url: `${SELLERS_URL}/register`,
         method: 'POST',
         body: data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     }),
 

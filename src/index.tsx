@@ -27,6 +27,7 @@ import OrderScreen from './screens/user/OrderScreen';
 import ProfileScreen from './screens/user/ProfileScreen';
 import RegistrationScreen from './screens/seller/RegistrationScreen';
 import { AdminRoute } from './components/route/AdminRoute';
+import DashboardScreen from './screens/seller/DashboardScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -59,7 +60,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path='' element={<SellerRoute />}>
-        <Route path='/seller/dashboard' element={<RegistrationScreen />} />
+        <Route path='/seller/dashboard' element={<DashboardScreen/>} />
       </Route>
 
     </Route>
