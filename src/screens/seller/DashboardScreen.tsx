@@ -1,9 +1,10 @@
 import React from 'react'
 
 const DashboardScreen = () => {
-  return (
-    <div>DashboardScreen</div>
-  )
+  return <>
+   <h1>DashboardScreen</h1>
+   </>
+  
 }
 
 export default DashboardScreen
