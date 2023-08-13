@@ -35,7 +35,6 @@ const RegistrationScreen = () => {
             dispatch(setCredentials({ ...res }));
             navigate('/seller/dashboard')
         } catch (err) {
-            console.log(err)
             toast.error("err")
         }
     };
