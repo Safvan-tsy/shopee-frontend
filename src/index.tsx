@@ -31,6 +31,9 @@ import DashboardScreen from './screens/seller/DashboardScreen';
 import SettingsScreen from './screens/seller/SettingsScreen';
 import WalletScreen from './screens/seller/WalletScreen';
 import NotFoundScreen from './screens/NotFoundScreen';
+import PaymentsScreen from './screens/seller/PaymentsScreen';
+import ProductsScreen from './screens/seller/ProductsScreen';
+import OrdersScreen from './screens/seller/OrdersScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,13 +66,16 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path='' element={<SellerRoute />}>
-        <Route path='/seller/dashboard' element={<DashboardScreen/>} />
-        <Route path='/seller/wallet' element={<WalletScreen/>} />
-        <Route path='/seller/settings' element={<SettingsScreen/>} />
+        <Route path='/seller/dashboard' element={<DashboardScreen />} />
+        <Route path='/seller/wallet' element={<WalletScreen />} />
+        <Route path='/seller/orders' element={<OrdersScreen />} />
+        <Route path='/seller/products' element={<ProductsScreen />} />
+        <Route path='/seller/payments' element={<PaymentsScreen />} />
+        <Route path='/seller/settings' element={<SettingsScreen />} />
       </Route>
 
-      <Route path="*"  element={<NotFoundScreen/>}/>
-      
+      <Route path="*" element={<NotFoundScreen />} />
+
     </Route>
   )
 )
