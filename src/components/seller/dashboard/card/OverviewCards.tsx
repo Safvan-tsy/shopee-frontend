@@ -1,15 +1,15 @@
 import React from 'react'
+import './OverviewCards.css'
 import { Col, Row } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
 
 const OverviewCards = () => {
   return (
     <>
-    <Row className='mx-auto'>
-      <Col md={3}>
+      <div className='mx-auto overview-cards'>
         <Card bg='warning'
           style={{ width: '15rem' }}
-          className="mb-2 mx-auto">
+          className="mb-2 mx-auto overview-card">
           <Card.Header>Header</Card.Header>
           <Card.Body>
             <Card.Title> Card Title </Card.Title>
@@ -19,11 +19,9 @@ const OverviewCards = () => {
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={3}>
         <Card bg='success'
           style={{ width: '15rem' }}
-          className="mb-2 mx-auto">
+          className="mb-2 mx-auto overview-card">
           <Card.Header>Header</Card.Header>
           <Card.Body>
             <Card.Title> Card Title </Card.Title>
@@ -33,11 +31,9 @@ const OverviewCards = () => {
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={3}>
         <Card bg='light'
           style={{ width: '15rem' }}
-          className="mb-2 mx-auto">
+          className="mb-2 mx-auto overview-card">
           <Card.Header>Header</Card.Header>
           <Card.Body>
             <Card.Title> Card Title </Card.Title>
@@ -47,11 +43,9 @@ const OverviewCards = () => {
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={3}>
         <Card bg='info'
           style={{ width: '15rem' }}
-          className="mb-2 mx-auto">
+          className="mb-2 mx-auto overview-card">
           <Card.Header>Header</Card.Header>
           <Card.Body>
             <Card.Title> Card Title </Card.Title>
@@ -61,8 +55,7 @@ const OverviewCards = () => {
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col>
-      </Row>
+        </div>
     </>
   )
 }

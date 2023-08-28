@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../../components/ui/Message';
 import Loader from '../../components/ui/Loader';
-import OverviewCards from '../../components/seller/dashboard/OverviewCards';
+import OverviewCards from '../../components/seller/dashboard/card/OverviewCards';
 import OverviewGraph from '../../components/seller/dashboard/OverviewGraph';
-import CustomerFeedback from '../../components/seller/dashboard/CustomerFeedback';
-import TopProducts from '../../components/seller/dashboard/TopProducts';
+import CustomerFeedback from '../../components/seller/dashboard/card/CustomerFeedback';
+import TopProducts from '../../components/seller/dashboard/topProducts/TopProducts';
 
 
 const DashboardScreen = () => {
