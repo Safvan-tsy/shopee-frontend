@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Message from '../../components/ui/Message';
 import Loader from '../../components/ui/Loader';
 import OverviewCards from '../../components/seller/dashboard/card/OverviewCards';
-import OverviewGraph from '../../components/seller/dashboard/OverviewGraph';
+import OverviewGraph from '../../components/seller/dashboard/chart/OverviewGraph';
 import CustomerFeedback from '../../components/seller/dashboard/card/CustomerFeedback';
 import TopProducts from '../../components/seller/dashboard/topProducts/TopProducts';
 

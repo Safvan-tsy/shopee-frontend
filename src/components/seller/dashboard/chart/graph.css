@@ -1,0 +1,23 @@
+.chart{
+    margin-top: 1.5rem;
+}
+
+/* Mobile Devices */
+@media (max-width: 767px) {
+    .chart {
+        width: 20rem !important;
+        overflow: scroll;
+    }
+}
+
+/* Portrait orientation tablets */
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+/* Landscape orientation tablets */
+@media (min-width: 1024px) and (max-width: 1366px) {}
+
+/* Standard laptop screens */
+@media (min-width: 1024px) and (max-width: 1366px) {}
+
+/* Larger laptop screens and desktops */
+@media (min-width: 1367px) {}
