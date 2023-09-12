@@ -1,13 +1,13 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "../ui/Rating";
-
+import './product.css'
 
 const Product = ({ product }) => {
     return (
-        <Card>
+        <Card className="mt-2 product-card">
             <Link to={`/product/${product._id}`}>
-                <Card.Img src={product.image} />
+                <Card.Img className="product-img" src={product.image} />
             </Link>
             <Card.Body>
                 <Link to={`/product/${product._id}`} >
@@ -20,7 +20,7 @@ const Product = ({ product }) => {
                         text={`${product.numReviews} reviews`} />
                 </Card.Text>
                 <Card.Text as='h3'>
-                    ${product.price}
+                    ₹{product.price}
                 </Card.Text>
             </Card.Body>
         </Card>

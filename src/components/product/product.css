@@ -1,0 +1,11 @@
+.product-card {
+    height:25rem;
+}
+
+.product-img{
+    height: 15rem;
+}
+
+.product-card a{
+    text-decoration: none;
+}
