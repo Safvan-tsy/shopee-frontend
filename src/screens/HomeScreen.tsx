@@ -7,6 +7,7 @@ import Message from '../components/ui/Message';
 import Paginate from '../components/ui/Paginate';
 import ProductCarousel from '../components/product/carousel/ProductCarousel';
 import { ProductType } from '../types/product.types';
+import './shared.css';
 
 const HomeScreen = () => {
     const { page, keyword } = useParams<{ page?: string; keyword?: string }>();
@@ -14,7 +15,7 @@ const HomeScreen = () => {
 
     return (
         <>
-            {!keyword ? <ProductCarousel /> : <Link to='/' className='btn btn-light mb-4'>Go Back</Link>}
+            {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link>}
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -23,8 +24,9 @@ const HomeScreen = () => {
                 </Message>
             ) : (
                 <>
-                    <h1>Latest Products</h1>
-                    <Row>
+                    <h1 className='homescreen-h1'>Latest Products</h1>
+                    <div >
+                    <Row className='card-container'>
                         {products?.data.products.map((product: ProductType) => (
                             <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
                                 <Product product={product} />
@@ -32,6 +34,7 @@ const HomeScreen = () => {
                         ))}
 
                     </Row>
+                    </div>
                     <Paginate pages={products?.pages} page={products?.page} keyword={keyword ? keyword : ''} />
                 </>
             )}

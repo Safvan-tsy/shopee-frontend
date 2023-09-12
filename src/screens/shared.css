@@ -1,0 +1,9 @@
+.homescreen-h1{
+    font-weight: 600;
+    font-style: normal;
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+}
