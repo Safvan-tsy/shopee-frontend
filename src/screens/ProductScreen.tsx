@@ -72,10 +72,10 @@ const ProductScreen = () => {
                                     <Rating value={product.data.product.rating} text={`${product.data.product.numReviews} reviews`} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Price:${product.data.product.price}
+                                    Price: ₹{product.data.product.price}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description:${product.data.product.description}
+                                    Description: {product.data.product.description}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -88,7 +88,7 @@ const ProductScreen = () => {
                                                 Price:
                                             </Col>
                                             <Col>
-                                                <strong>${product.data.product.price}</strong>
+                                                <strong>₹{product.data.product.price}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -137,7 +137,7 @@ const ProductScreen = () => {
                         <Col md={6}>
                             {loadingReview && <Loader />}
                             <h2>Reviews</h2>
-                            {!res.reviews && <Message>No Reviews</Message>}
+                            {!res?.reviews && <Message>No Reviews</Message>}
                             <ListGroup variant="flush">
                                 {res.reviews.map(review => (
                                     <ListGroup.Item>
