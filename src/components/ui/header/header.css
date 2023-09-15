@@ -1,0 +1,41 @@
+
+.main-header{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+}
+
+.main-nav {
+  background-color: white;
+  color: black;
+}
+
+.header-cart-btn{
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.header-cart-btn:hover{
+  background-color: #296d90;
+  color: #fefefe;
+}
+
+.header-search-btn{
+  color: #515151;
+  border-radius: 1rem;
+  border-color: #296d90;
+  cursor: pointer;
+}
+.header-search-btn:hover{
+  background-color: #296d90;
+  color: #fefefe;
+}
+
+.search-box{
+  background-color:rgb(240, 245, 255);
+  border-radius: 1rem;
+}
+
+.search-box:focus{
+  background-color:rgb(240, 245, 255);
+}

@@ -2,13 +2,14 @@ import React from 'react';
 import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLogoutMutation } from '../../slices/usersApiSlice';
-import { logout } from '../../slices/authSlice';
+import { useLogoutMutation } from '../../../slices/usersApiSlice';
+import { logout } from '../../../slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../store';
+import { RootState } from '../../../store';
 import SearchBox from './SearchBox';
+import './header.css';
 // import DarkMode from '../DarkMode/DarkMode';
 
 const Header: React.FC = () => {
@@ -31,8 +32,9 @@ const Header: React.FC = () => {
   const handleSellerLogin = () => { }
 
   return (
+    <div  className='main-header'>
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+      <Navbar className='main-nav' expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
@@ -44,7 +46,7 @@ const Header: React.FC = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <SearchBox />
-              <LinkContainer to="/cart">
+              <LinkContainer to="/cart" className="header-cart-btn">
                 <Nav.Link>
                   <FaShoppingCart /> Cart
                   {cartItems.length > 0 && (
@@ -109,6 +111,7 @@ const Header: React.FC = () => {
         </Container>
       </Navbar>
     </header>
+    </div>
   );
 };
 
