@@ -5,7 +5,7 @@ import './product.css'
 
 const Product = ({ product }) => {
     return (
-        <Card className="mt-2 product-card">
+        <Card className="mt-3 product-card">
             <Link to={`/product/${product._id}`}>
                 <Card.Img className="product-img" src={product.image} />
             </Link>

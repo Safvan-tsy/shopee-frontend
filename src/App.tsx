@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/ui/header/Header';
@@ -12,13 +12,18 @@ function App() {
   const { sellerInfo } = useSelector((state: RootState) => state.auth);
   return (
     <>
+    <Row>
       <Header />
+    </Row>
       {/* {sellerInfo && <SellerHeader />} */}
-      <main className='py-3'>
-        <Container>
+        
+      <Row>
+      <main className='py-3 main-container'>
+        <Container className='sub-container'>
           <Outlet />
         </Container>
       </main>
+      </Row>
       <Footer />
       <ToastContainer />
     </>
