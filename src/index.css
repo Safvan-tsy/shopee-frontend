@@ -11,7 +11,9 @@
 * {
   transition: all 0.3 ease-in-out;
 } */
-
+html{
+  overflow-x: hidden;
+}
 main {
   min-height: 80vh;
   font-family:'Inter', sans-serif;
@@ -60,4 +62,10 @@ table th {
 
 .review button {
   margin-top: 10px;
+}
+
+.main-container{
+  border-top: 0.5rem solid rgb(240, 245, 255);
+  border-bottom: 0.5rem solid rgb(240, 245, 255);
+  margin-top: 5rem;
 }

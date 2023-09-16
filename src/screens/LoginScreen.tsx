@@ -8,6 +8,7 @@ import { useLoginMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { setCredentials } from '../slices/authSlice';
 import { RootState } from '../store';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -26,6 +27,8 @@ const LoginScreen = () => {
             navigate(redirect);
         }
     }, [navigate, redirect, userInfo]);
+
+    useDocumentTitle('Login to Your Account | Shopee', false);
 
     const submitHandler = async (e) => {
         e.preventDefault();

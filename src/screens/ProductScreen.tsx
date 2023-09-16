@@ -9,6 +9,7 @@ import Loader from "../components/ui/Loader";
 import Message from "../components/ui/Message";
 import { addToCart } from '../slices/cartSlice';
 import { RootState } from "../store";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 // import Meta from "../components/Meta";
 
 const ProductScreen = () => {
@@ -26,6 +27,8 @@ const ProductScreen = () => {
     const { data: res, isLoading: loadingReview, refetch: reviewRefetch } = useGetReviewsQuery(prodId);
     const { data: product, isLoading, refetch, error } = useGetProductDetailQuery(prodId);
     const [createReview, { isLoading: reviewLoading }] = useCreateReviewMutation();
+
+    useDocumentTitle(product?.data?.product?.name || 'Loading...', false);
 
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product.data.product, qty }))
@@ -72,10 +75,10 @@ const ProductScreen = () => {
                                     <Rating value={product.data.product.rating} text={`${product.data.product.numReviews} reviews`} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Price:${product.data.product.price}
+                                    Price: ₹{product.data.product.price}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description:${product.data.product.description}
+                                    Description: {product.data.product.description}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -88,7 +91,7 @@ const ProductScreen = () => {
                                                 Price:
                                             </Col>
                                             <Col>
-                                                <strong>${product.data.product.price}</strong>
+                                                <strong>₹{product.data.product.price}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -137,9 +140,9 @@ const ProductScreen = () => {
                         <Col md={6}>
                             {loadingReview && <Loader />}
                             <h2>Reviews</h2>
-                            {!res.reviews && <Message>No Reviews</Message>}
+                            {!res?.reviews && <Message>No Reviews</Message>}
                             <ListGroup variant="flush">
-                                {res.reviews.map(review => (
+                                {res?.reviews.map(review => (
                                     <ListGroup.Item>
                                         <strong>{review.name}</strong>
                                         <Rating value={review.rating} text={undefined} />

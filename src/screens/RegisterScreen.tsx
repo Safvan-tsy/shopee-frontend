@@ -8,6 +8,7 @@ import { useRegisterMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { setCredentials } from '../slices/authSlice';
 import { RootState } from '../store';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('')
@@ -15,6 +16,8 @@ const RegisterScreen = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
+    useDocumentTitle('Create New Account | Shopee', false);
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [register, { isLoading }] = useRegisterMutation();

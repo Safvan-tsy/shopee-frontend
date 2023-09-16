@@ -6,8 +6,10 @@ import { FaTrash } from 'react-icons/fa';
 import Message from '../components/ui/Message';
 import { addToCart, removeFromCart } from '../slices/cartSlice';
 import { RootState } from '../store';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const CartScreen = () => {
+  useDocumentTitle('Shopping Cart | Shopee', false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart)
