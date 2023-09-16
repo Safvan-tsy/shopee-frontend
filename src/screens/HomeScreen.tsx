@@ -8,11 +8,13 @@ import Paginate from '../components/ui/Paginate';
 import ProductCarousel from '../components/product/carousel/ProductCarousel';
 import { ProductType } from '../types/product.types';
 import './shared.css';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const HomeScreen = () => {
     const { page, keyword } = useParams<{ page?: string; keyword?: string }>();
     const { data: products, isLoading, error } = useGetProductsQuery({ page: page ?? '1', keyword: keyword ?? '', });
-
+    useDocumentTitle('Online Shopping From Near By Sellers. Best Offers!', false);
+    
     return (
         <>
             {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link>}

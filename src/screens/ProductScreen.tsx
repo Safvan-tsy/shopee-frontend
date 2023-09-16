@@ -9,6 +9,7 @@ import Loader from "../components/ui/Loader";
 import Message from "../components/ui/Message";
 import { addToCart } from '../slices/cartSlice';
 import { RootState } from "../store";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 // import Meta from "../components/Meta";
 
 const ProductScreen = () => {
@@ -26,6 +27,8 @@ const ProductScreen = () => {
     const { data: res, isLoading: loadingReview, refetch: reviewRefetch } = useGetReviewsQuery(prodId);
     const { data: product, isLoading, refetch, error } = useGetProductDetailQuery(prodId);
     const [createReview, { isLoading: reviewLoading }] = useCreateReviewMutation();
+
+    useDocumentTitle(product?.data?.product?.name || 'Loading...', false);
 
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product.data.product, qty }))
@@ -139,7 +142,7 @@ const ProductScreen = () => {
                             <h2>Reviews</h2>
                             {!res?.reviews && <Message>No Reviews</Message>}
                             <ListGroup variant="flush">
-                                {res.reviews.map(review => (
+                                {res?.reviews.map(review => (
                                     <ListGroup.Item>
                                         <strong>{review.name}</strong>
                                         <Rating value={review.rating} text={undefined} />
