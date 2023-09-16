@@ -18,9 +18,11 @@ function App() {
       {/* {sellerInfo && <SellerHeader />} */}
         
       <Row>
-      <main className='py-3 main-container'>
+      <main className='main-container'>
         <Container className='sub-container'>
+          <div className='outlet-container'>
           <Outlet />
+          </div>
         </Container>
       </main>
       </Row>

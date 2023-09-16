@@ -9,7 +9,7 @@ import { RootState } from '../store';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const CartScreen = () => {
-  useDocumentTitle('Shopping Cart | Shopee', false);
+  useDocumentTitle('Shopping Cart | Shorpee', false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart)

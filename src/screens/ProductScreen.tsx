@@ -10,6 +10,7 @@ import Message from "../components/ui/Message";
 import { addToCart } from '../slices/cartSlice';
 import { RootState } from "../store";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { FaArrowLeft } from "react-icons/fa";
 // import Meta from "../components/Meta";
 
 const ProductScreen = () => {
@@ -50,8 +51,8 @@ const ProductScreen = () => {
     }
     return (
         <>
-            <Link className="btn btn-light my-3 " to='/'>
-                Go Back
+            <Link className="btn btn-light go-back-btn" to='/'>
+            <FaArrowLeft/>
             </Link>
             {isLoading ? (
                 <Loader />

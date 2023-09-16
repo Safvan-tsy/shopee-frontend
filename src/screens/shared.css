@@ -7,3 +7,11 @@
     display: flex;
     justify-content: center;
 }
+
+.go-back-btn{
+    color: #515151;
+    border-radius: 1rem;
+    border-color: #296d90;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}

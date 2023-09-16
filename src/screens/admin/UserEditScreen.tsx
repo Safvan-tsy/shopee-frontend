@@ -8,6 +8,7 @@ import FormContainer from '../../components/ui/FormContainer';
 import { toast } from 'react-toastify';
 import { useGetUserDetailsQuery,useUpdateUserMutation } from '../../slices/usersApiSlice';
 import { RootState } from '../../store';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const UserEditScreen = () => {
     const navigate = useNavigate();
@@ -50,8 +51,8 @@ const UserEditScreen = () => {
     };
 
     return <>
-        <Link to='/admin/userlist' className='btn btn-light my-3'>
-            Go back
+        <Link to='/admin/userlist' className='btn btn-light go-back-btn'>
+        <FaArrowLeft/>
         </Link>
         <FormContainer>
             <h1>Edit User Details</h1>

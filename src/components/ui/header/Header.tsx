@@ -38,7 +38,7 @@ const Header: React.FC = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <img src={logo} alt="Logo" /> Shopee
+              <img src={logo} alt="Logo" className='shorpe-logo'/>
             </Navbar.Brand>
           </LinkContainer>
           {/* <DarkMode/> */}

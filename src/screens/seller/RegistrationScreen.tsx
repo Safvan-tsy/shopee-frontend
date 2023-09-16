@@ -93,7 +93,7 @@ const RegistrationScreen = () => {
                 </Form.Group>
                 <Row className='py-3'>
                     <Col>
-                        By continuing, I agree to Shopee's  <Link to={'/login'}>Terms & conditions</Link>
+                        By continuing, I agree to Shorpee's  <Link to={'/login'}>Terms & conditions</Link>
                     </Col>
                 </Row>
                 <Button type='submit'
