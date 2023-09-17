@@ -69,3 +69,16 @@ table th {
   border-bottom: 0.5rem solid rgb(240, 245, 255);
   margin-top: 5rem;
 }
+
+.sub-container {
+  max-width: 100%;
+  padding: 1rem;
+  /* border: 0.1rem solid rgb(224, 231, 244); /* Add the border style (solid) and color (#296d90) */
+  /*border-radius: 1rem; */
+}
+
+.outlet-container {
+  max-width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+}

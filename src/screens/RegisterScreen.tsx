@@ -16,7 +16,7 @@ const RegisterScreen = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
-    useDocumentTitle('Create New Account | Shopee', false);
+    useDocumentTitle('Create New Account | Shorpee', false);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();

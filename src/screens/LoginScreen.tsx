@@ -28,7 +28,7 @@ const LoginScreen = () => {
         }
     }, [navigate, redirect, userInfo]);
 
-    useDocumentTitle('Login to Your Account | Shopee', false);
+    useDocumentTitle('Login to Your Account | Shorpee', false);
 
     const submitHandler = async (e) => {
         e.preventDefault();

@@ -9,7 +9,7 @@ import { RootState } from '../store';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const CartScreen = () => {
-  useDocumentTitle('Shopping Cart | Shopee', false);
+  useDocumentTitle('Shopping Cart | Shorpee', false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart)
@@ -40,7 +40,7 @@ const CartScreen = () => {
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>
-                    ${item.price}
+                  ₹{item.price}
                   </Col>
                   <Col md={2}>
                     <Form.Control as='select'
@@ -71,7 +71,7 @@ const CartScreen = () => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-              ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+              ₹{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button type='button' className='btn-block'

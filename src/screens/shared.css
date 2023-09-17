@@ -7,3 +7,26 @@
     display: flex;
     justify-content: center;
 }
+
+.go-back-btn{
+    color: #515151;
+    border-radius: 1rem;
+    border-color: #296d90;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.product-details-container{
+  border: 0.1rem solid rgb(224, 231, 244); /* Add the border style (solid) and color (#296d90) */
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: rgb(245 246 247);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+}
+
+.add-to-cart-btn{
+    background-color: #296d90;
+    color: white;
+    border-radius: 1rem;
+    border-color: #296d90;
+}

@@ -39,3 +39,8 @@
 .search-box:focus{
   background-color:rgb(240, 245, 255);
 }
+
+.shorpe-logo{
+  width: 9rem;
+  height: 3rem;
+}

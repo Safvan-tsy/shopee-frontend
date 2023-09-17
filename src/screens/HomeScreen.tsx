@@ -9,7 +9,7 @@ import ProductCarousel from '../components/product/carousel/ProductCarousel';
 import { ProductType } from '../types/product.types';
 import './shared.css';
 import useDocumentTitle from '../hooks/useDocumentTitle';
-
+import {FaArrowLeft} from 'react-icons/fa';
 const HomeScreen = () => {
     const { page, keyword } = useParams<{ page?: string; keyword?: string }>();
     const { data: products, isLoading, error } = useGetProductsQuery({ page: page ?? '1', keyword: keyword ?? '', });
@@ -17,7 +17,7 @@ const HomeScreen = () => {
     
     return (
         <>
-            {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link>}
+            {keyword && <Link to='/' className='btn btn-light mb-4 go-back-btn'><FaArrowLeft/></Link>}
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -26,11 +26,11 @@ const HomeScreen = () => {
                 </Message>
             ) : (
                 <>
-                    <h1 className='homescreen-h1'>Latest Products</h1>
+                    {!keyword && <h1 className='homescreen-h1'>Latest Products</h1>}
                     <div >
                     <Row className='card-container'>
                         {products?.data.products.map((product: ProductType) => (
-                            <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                            <Col sm={6} md={3} lg={4} xl={3} key={product._id}>
                                 <Product product={product} />
                             </Col>
                         ))}

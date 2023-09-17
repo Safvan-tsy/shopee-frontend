@@ -8,6 +8,7 @@ import FormContainer from '../../components/ui/FormContainer';
 import { toast } from 'react-toastify';
 import { useUploadProdImageMutation, useUpdateProductMutation, useGetProductDetailQuery } from '../../slices/productsApiSlice';
 import { RootState } from '../../store';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const ProductEditScreen = () => {
     const navigate = useNavigate();
@@ -75,8 +76,8 @@ const ProductEditScreen = () => {
 
     }
     return <>
-        <Link to='/admin/productlist' className='btn btn-light my-3'>
-            Go back
+        <Link to='/admin/productlist' className='btn btn-light go-back-btn '>
+        <FaArrowLeft/>
         </Link>
         <FormContainer>
             <h1>Edit Product</h1>

@@ -38,7 +38,7 @@ const Header: React.FC = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <img src={logo} alt="Logo" /> Shopee
+              <img src={logo} alt="Logo" className='shorpe-logo'/>
             </Navbar.Brand>
           </LinkContainer>
           {/* <DarkMode/> */}
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                   </LinkContainer>
                   {!userInfo.isSeller ? (
                     <LinkContainer to="/seller/register">
-                      <NavDropdown.Item>Become A Seller</NavDropdown.Item>
+                      <NavDropdown.Item>Become a Seller</NavDropdown.Item>
                     </LinkContainer>
                   ) : (
                     <LinkContainer to="/seller/dashboard">
