@@ -1,6 +1,6 @@
 {
-  "short_name": "shopee",
-  "name": "shopee",
+  "short_name": "shorpee",
+  "name": "shorpee",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },

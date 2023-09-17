@@ -11,6 +11,7 @@ import { addToCart } from '../slices/cartSlice';
 import { RootState } from "../store";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaArrowLeft } from "react-icons/fa";
+import './shared.css';
 // import Meta from "../components/Meta";
 
 const ProductScreen = () => {
@@ -63,10 +64,11 @@ const ProductScreen = () => {
             ) : (
                 <>
                     {/* <Meta title={product.data.product.name} /> */}
-                    <Row>
+                    <Row className="product-details-container">
                         <Col md={5}>
                             <Image src={product.data.product.image} alt={product.data.product.name} fluid />
                         </Col>
+                        {/* <div className="product-details-container"></div> */}
                         <Col md={4}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
@@ -126,7 +128,7 @@ const ProductScreen = () => {
                                         </ListGroup.Item>
                                     )}
                                     <ListGroup.Item>
-                                        <Button className="btn-block"
+                                        <Button className="btn-block add-to-cart-btn"
                                             type='button'
                                             disabled={product.data.product.countInStock === 0}
                                             onClick={addToCartHandler} >
@@ -138,10 +140,10 @@ const ProductScreen = () => {
                         </Col>
                     </Row>
                     <Row className="review">
-                        <Col md={6}>
+                        {/* <Col md={6}>
                             {loadingReview && <Loader />}
                             <h2>Reviews</h2>
-                            {!res?.reviews && <Message>No Reviews</Message>}
+                            {!res.reviews && <Message>No Reviews</Message>}
                             <ListGroup variant="flush">
                                 {res?.reviews.map(review => (
                                     <ListGroup.Item>
@@ -155,7 +157,7 @@ const ProductScreen = () => {
                                     <h2>Write a Review</h2>
                                     {reviewLoading && <Loader />}
                                     {userInfo ? (
-                                        <Form onSubmit={submitHandler}>
+                                        <Form onSubmit={submitHandler} className="product-form">
                                             <Form.Group controlId="rating" className="my-2">
                                                 <Form.Label>Rating</Form.Label>
                                                 <Form.Control
@@ -191,7 +193,7 @@ const ProductScreen = () => {
                                     )}
                                 </ListGroup.Item>
                             </ListGroup>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </>
             )}

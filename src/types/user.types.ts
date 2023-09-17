@@ -6,6 +6,7 @@ export interface User {
     isSeller:boolean;
     password?:string;
     confirmPassword?:string;
+    seller?:Seller;
 }
 
 export interface Seller {
