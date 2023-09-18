@@ -26,7 +26,7 @@ const HomeScreen = () => {
                 </Message>
             ) : (
                 <>
-                    {!keyword && <h1 className='homescreen-h1'>Latest Products</h1>}
+                    {/* {!keyword && <h1 className='homescreen-h1'>Latest Products</h1>} */}
                     <div >
                     <Row className='card-container'>
                         {products?.data.products.map((product: ProductType) => (
