@@ -2,7 +2,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import Product from '../components/product/Product';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
-import Loader from '../components/ui/Loader';
+import Loader from '../components/ui/loader/Loader';
 import Message from '../components/ui/Message';
 import Paginate from '../components/ui/Paginate';
 import ProductCarousel from '../components/product/carousel/ProductCarousel';

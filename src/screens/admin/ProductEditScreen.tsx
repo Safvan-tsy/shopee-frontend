@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import Message from '../../components/ui/Message';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import FormContainer from '../../components/ui/FormContainer';
 import { toast } from 'react-toastify';
 import { useUploadProdImageMutation, useUpdateProductMutation, useGetProductDetailQuery } from '../../slices/productsApiSlice';

@@ -5,7 +5,7 @@ import { FaTimes, FaGratipay } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../../components/ui/Message';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import OverviewCards from '../../components/seller/dashboard/card/OverviewCards';
 import OverviewGraph from '../../components/seller/dashboard/chart/OverviewGraph';
 import CustomerFeedback from '../../components/seller/dashboard/card/CustomerFeedback';

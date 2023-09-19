@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import CheckoutSteps from '../../components/ui/CheckoutSteps';
 import Message from '../../components/ui/Message';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import { useCreateOrderMutation } from '../../slices/ordersApiSlice';
 import { clearCartItems } from '../../slices/cartSlice';
 import { RootState } from '../../store';
