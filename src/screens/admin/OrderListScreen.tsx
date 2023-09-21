@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import { FaTimes } from 'react-icons/fa';
 import Message from '../../components/ui/Message';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
 import { RootState } from '../../store';
 

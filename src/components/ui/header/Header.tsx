@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaShoppingCart, FaUser ,FaRegArrowAltCircleRight} from 'react-icons/fa';
 import logo from '../../../assets/logo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../../../slices/usersApiSlice';
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                     </LinkContainer>
                   ) : (
                     <LinkContainer to="/seller/dashboard">
-                      <NavDropdown.Item>Seller Dashboard</NavDropdown.Item>
+                      <NavDropdown.Item>Seller Dashboard <FaRegArrowAltCircleRight/></NavDropdown.Item>
                     </LinkContainer>
                   )}
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
@@ -92,20 +92,6 @@ const Header: React.FC = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
-              {sellerInfo && (
-                <NavDropdown title="Seller Zone" id="adminuser">
-                  <LinkContainer to="/seller/dashboard">
-                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/seller/wallet">
-                    <NavDropdown.Item>wallet</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/seller/settings">
-                    <NavDropdown.Item>Settings</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
-              ) 
-            } 
             </Nav>
           </Navbar.Collapse>
         </Container>

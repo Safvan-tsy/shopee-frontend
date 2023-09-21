@@ -7,7 +7,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import Paginate from '../../components/ui/Paginate';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Message from '../../components/ui/Message';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import {
     useGetProductsQuery,
     useCreateProductMutation,

@@ -1,16 +1,18 @@
 .product-card {
-    height:25rem;
+    height: 25rem;
+    background-color: rgb(245 246 247);
 }
 
-.product-img{
+.product-img {
     height: 15rem;
 }
 
-.product-card a{
+.product-card a {
     text-decoration: none;
 }
-.product-card:hover{
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+
+.product-card:hover {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
     transition: all 0.3s ease-in-out;
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Message from '../../components/ui/Message';
 import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap';
-import Loader from '../../components/ui/Loader';
+import Loader from '../../components/ui/loader/Loader';
 import { useGetOrderDetailsQuery, useUpdateOrderToDeliveredMutation } from '../../slices/ordersApiSlice';
 import { useSelector } from 'react-redux';
 import Stripe from '../../components/stripe/Stripe';
