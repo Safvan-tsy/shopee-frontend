@@ -12,6 +12,7 @@ import { RootState } from "../store";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaArrowLeft } from "react-icons/fa";
 import './shared.css';
+import { useAddToCartMutation } from "../slices/usersApiSlice";
 // import Meta from "../components/Meta";
 
 const ProductScreen = () => {
@@ -29,12 +30,32 @@ const ProductScreen = () => {
     const { data: res, isLoading: loadingReview, refetch: reviewRefetch } = useGetReviewsQuery(prodId);
     const { data: product, isLoading, refetch, error } = useGetProductDetailQuery(prodId);
     const [createReview, { isLoading: reviewLoading }] = useCreateReviewMutation();
+    const [addToCart, { error: addError, isLoading: addToCartLoading }] = useAddToCartMutation();
 
     useDocumentTitle(product?.data?.product?.name || 'Loading...', false);
 
-    const addToCartHandler = () => {
-        dispatch(addToCart({ ...product.data.product, qty }))
-        navigate('/cart')
+    const addToCartHandler = async () => {
+        if (userInfo) {
+            const data = {
+                sellerId:product.data.product.sellerId,
+                productName:product.data.product.name, 
+                qty:qty,
+                ProductImage:product.data.product.image[0],
+                productId:product.data.product._id,
+                price:product.data.product.price,
+                shippingPrice:product.data.product.shippingPrice,
+            }
+            const addRes = await addToCart({ data, token })
+            console.log(addRes)
+            if(addError){
+                toast.error("Something went wrong")
+            }else{
+                toast.success("Product added to cart")
+                navigate('/cart')
+            }
+        } else {
+            navigate(`/login?redirect=/product/${product.data.product._id}`)
+        }
     }
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -53,7 +74,7 @@ const ProductScreen = () => {
     return (
         <>
             <Link className="btn btn-light go-back-btn" to='/'>
-            <FaArrowLeft/>
+                <FaArrowLeft />
             </Link>
             {isLoading ? (
                 <Loader />
@@ -66,7 +87,7 @@ const ProductScreen = () => {
                     {/* <Meta title={product.data.product.name} /> */}
                     <Row className="product-details-container">
                         <Col md={5}>
-                            <Image src={product.data.product.image} alt={product.data.product.name} fluid />
+                            <Image src={product.data.product.image[0]} alt={product.data.product.name} fluid />
                         </Col>
                         {/* <div className="product-details-container"></div> */}
                         <Col md={4}>
@@ -128,12 +149,14 @@ const ProductScreen = () => {
                                         </ListGroup.Item>
                                     )}
                                     <ListGroup.Item>
+                                        {addToCartLoading? (<Loader/>) : (
                                         <Button className="btn-block add-to-cart-btn"
                                             type='button'
                                             disabled={product.data.product.countInStock === 0}
                                             onClick={addToCartHandler} >
                                             Add To Cart
                                         </Button>
+                                        )}
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>
