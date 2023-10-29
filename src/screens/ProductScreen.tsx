@@ -40,7 +40,7 @@ const ProductScreen = () => {
                 sellerId:product.data.product.sellerId,
                 productName:product.data.product.name, 
                 qty:qty,
-                ProductImage:product.data.product.image[0],
+                productImage:product.data.product.image[0],
                 productId:product.data.product._id,
                 price:product.data.product.price,
                 shippingPrice:product.data.product.shippingPrice,
