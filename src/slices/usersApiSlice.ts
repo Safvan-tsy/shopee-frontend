@@ -81,6 +81,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         },
         keepUnusedDataFor: 5,
       }),
+      providesTags: ['Cart'],
     }),
     addToCart: builder.mutation<{ status:String,cart: any }, { data:any,token:string}>({
       query: ({data,token}) => ({
@@ -91,6 +92,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         },
         body: data,
       }),
+      invalidatesTags: ['Cart'],
     }),
   }),
 });

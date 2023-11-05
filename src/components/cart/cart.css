@@ -48,6 +48,14 @@ a {
 
 }
 
+.cart-actions{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
 .cart-img {
   max-width: 3rem;
   max-height: 3rem;

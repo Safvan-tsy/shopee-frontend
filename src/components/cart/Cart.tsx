@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
-import { FaTrash } from 'react-icons/fa';
+import { Image, Form, Button } from 'react-bootstrap'
 import { RootState } from '../../store';
+import { FaTrash } from 'react-icons/fa';
 import './cart.css'
-import { useGetProductDetailQuery } from '../../slices/productsApiSlice';
 
 const Cart = ({ cart }) => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const Cart = ({ cart }) => {
   const [address, setAddress] = useState('')
   const [district, setDistrict] = useState('')
   const [pincode, setPincode] = useState('')
-  const [totalTax, setTotalTax] = useState(0); 
+  const [totalTax, setTotalTax] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
 
   useEffect(() => {
@@ -26,8 +25,8 @@ const Cart = ({ cart }) => {
       shipping += item.shippingPrice;
     });
 
-    setTotalTax(tax); 
-    setTotalShipping(shipping); 
+    setTotalTax(tax);
+    setTotalShipping(shipping);
   }, [cart]);
 
 
@@ -35,14 +34,14 @@ const Cart = ({ cart }) => {
   const checkoutHandler = () => { navigate('/login?redirect=/shipping') }
 
   return (
-    <table>
+    <table className='mb-2'>
       <thead>
         <tr>
           <th scope="col">Items</th>
           <th scope="col">SHIPPING ADDRESS</th>
           <th scope="col">₹ Breakdown</th>
           <th scope="col">Total(₹)</th>
-          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -81,10 +80,11 @@ const Cart = ({ cart }) => {
             Shipping: {totalShipping}
           </td>
           <td data-label="Total(₹)">{cart.cartTotal}</td>
-          <td data-label="Status" className='item-td'>
+          <td data-label="Actions" className='item-td'>
             <div className="items">
-              <div className="items__title">
+              <div className="items__title cart-actions">
                 <Button variant='success' onClick={checkoutHandler}>Checkout</Button>
+                <Button variant='danger'><FaTrash/></Button>
               </div>
             </div>
           </td>

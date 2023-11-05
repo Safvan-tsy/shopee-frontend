@@ -46,7 +46,7 @@ const ProductScreen = () => {
                 shippingPrice:product.data.product.shippingPrice,
             }
             const addRes = await addToCart({ data, token })
-            console.log(addRes)
+            
             if(addError){
                 toast.error("Something went wrong")
             }else{

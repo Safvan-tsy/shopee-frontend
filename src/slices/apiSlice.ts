@@ -13,6 +13,6 @@ export type EndpointsBuilder = Parameters<typeof createApi>[0]['endpoints'];
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ['Product', 'Order', 'User'],
+  tagTypes: ['Product', 'Order', 'User','Cart'],
   endpoints:(builder) => ({}),
 });
