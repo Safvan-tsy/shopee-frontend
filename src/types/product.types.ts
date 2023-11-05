@@ -2,6 +2,7 @@ import { User } from "./user.types";
 
 export interface ProductType {
     _id:string;
+    sellerId:string;
     name:string;
     image:string;
     price:number;
@@ -11,6 +12,7 @@ export interface ProductType {
     countInStock:number;
     brand:string;
     category:string;
+    shippingPrice:number;
 }
 
 
@@ -46,5 +48,35 @@ export interface orderType {
     isPaid?:boolean;
     paidAt?:any;
 }
-    
- 
+
+export interface CartItem {
+    userId: string;
+    sellerId: string;
+    status: string;
+    orderItems: [
+        {
+            name: string;
+            qty: number;
+            image: string;
+            price: number;
+            productId: string,
+            itemsPrice: number;
+            taxPrice: number;
+            shippingPrice: number;
+            totalPrice: number;
+        }
+    ];
+    shippingAddress: {
+        address: string;
+        city: string;
+        postalCode: string;
+        state:string;
+        country: string
+    };
+    paymentMethod?: string;
+    cartTotal: number;
+    isPaid?: boolean;
+    paidAt?: Date;
+    isDelivered?: boolean;
+    deliveredAt?: Date;
+}

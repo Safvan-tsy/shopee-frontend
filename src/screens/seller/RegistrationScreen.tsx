@@ -23,7 +23,7 @@ const RegistrationScreen = () => {
 
     useEffect(() => {
         if (userInfo.isSeller) {
-            navigate('/seller/dashboard');
+            navigate('/');
         }
     }, [navigate, userInfo]);
 
@@ -33,9 +33,9 @@ const RegistrationScreen = () => {
             const data = { pan, phone, password, displayName }
             const res = await registration({ data, token }).unwrap();
             dispatch(setCredentials({ ...res }));
-            navigate('/seller/dashboard')
+            navigate('/')
         } catch (err) {
-            toast.error("err")
+            toast.error("Failed to Register , please try again")
         }
     };
     return (

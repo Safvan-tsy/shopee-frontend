@@ -73,6 +73,27 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    getCartDetails: builder.query<{ status:String,cart: any }, { token: string }>({
+      query: ({ token }) => ({
+        url: `${USERS_URL}/cart`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        keepUnusedDataFor: 5,
+      }),
+      providesTags: ['Cart'],
+    }),
+    addToCart: builder.mutation<{ status:String,cart: any }, { data:any,token:string}>({
+      query: ({data,token}) => ({
+        url: `${USERS_URL}/cart`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: data,
+      }),
+      invalidatesTags: ['Cart'],
+    }),
   }),
 });
 
@@ -85,4 +106,6 @@ export const {
   useDeleteUserMutation,
   useGetUserDetailsQuery,
   useUpdateUserMutation,
+  useAddToCartMutation,
+  useGetCartDetailsQuery
 } = usersApiSlice;
