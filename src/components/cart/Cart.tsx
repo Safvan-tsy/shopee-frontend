@@ -5,6 +5,8 @@ import { Image, Form, Button } from 'react-bootstrap'
 import { RootState } from '../../store';
 import { FaTrash } from 'react-icons/fa';
 import './cart.css'
+import { useDeleteCartMutation } from '../../slices/usersApiSlice';
+import { toast } from 'react-toastify';
 
 const Cart = ({ cart }) => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ const Cart = ({ cart }) => {
   const [pincode, setPincode] = useState('')
   const [totalTax, setTotalTax] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
+  const [deleteUser, {isLoading,error}] = useDeleteCartMutation()
 
   useEffect(() => {
     let tax = 0;
@@ -32,7 +35,16 @@ const Cart = ({ cart }) => {
 
   const token = useSelector((state: RootState) => state.auth.token);
   const checkoutHandler = () => { navigate('/login?redirect=/shipping') }
-
+  const deleteHandler = async(cartId:string) => {
+    if(window.confirm('Are you sure')){
+        try {
+            await deleteUser({cartId,token})
+            toast.success('Deleted');
+        } catch (error) {
+            toast.error('Error occured')
+        }
+    }
+}
   return (
     <table className='mb-2'>
       <thead>
@@ -84,7 +96,7 @@ const Cart = ({ cart }) => {
             <div className="items">
               <div className="items__title cart-actions">
                 <Button variant='success' onClick={checkoutHandler}>Checkout</Button>
-                <Button variant='danger'><FaTrash/></Button>
+                <Button variant='danger' onClick={() => deleteHandler(cart._id)}><FaTrash/></Button>
               </div>
             </div>
           </td>
