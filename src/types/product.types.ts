@@ -30,24 +30,39 @@ export interface CartItem {
     image?:string;
   }
 
-export interface orderType { 
-    orderItems: CartItem[]; 
-    shippingAddress: any; 
-    paymentMethod: string; 
-    itemsPrice: string; 
-    shippingPrice: string; 
-    taxPrice: string; 
-    totalPrice: string; 
-    token?: string; 
-    createdAt?:any;
-    _id?:string;
-    product?:string;
-    isDelivered?:boolean; 
-    deliveredAt?:any;
-    user?:User;
-    isPaid?:boolean;
-    paidAt?:any;
+export interface OrderType{
+    userId: string;
+    sellerId: string;
+    status: string;
+    statusDescription?: string;
+    orderItems: [
+        {
+            name: string;
+            qty: number;
+            image: string;
+            price: number;
+            product: string;
+            itemsPrice: number;
+            taxPrice: number;
+            shippingPrice: number;
+            totalPrice: number;
+        }
+    ];
+    cartTotal: number;
+    shippingAddress: {
+        address: string;
+        city: string;
+        postalCode: string;
+        state: string;
+        country: string
+    };
+    paymentMethod?: string;
+    isPaid?: boolean;
+    paidAt?: Date;
+    isDelivered?: boolean;
+    deliveredAt?: Date;
 }
+
 
 export interface CartItem {
     userId: string;

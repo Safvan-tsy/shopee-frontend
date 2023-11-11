@@ -34,7 +34,7 @@ const OrderScreen = () => {
             : (
                 <>
                     <h1>Order {orderId} </h1>
-                    <Row>
+                    {/* <Row>
                         <Col md={8}>
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
@@ -144,7 +144,7 @@ const OrderScreen = () => {
                             </Card>
 
                         </Col>
-                    </Row>
+                    </Row> */}
                 </>
             )
 }

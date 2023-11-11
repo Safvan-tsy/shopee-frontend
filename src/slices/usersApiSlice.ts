@@ -94,6 +94,16 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Cart'],
     }),
+    deleteCart: builder.mutation<void, {cartId: string; token: string }>({
+      query: ({ cartId, token }) => ({
+        url: `${USERS_URL}/cart/${cartId}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ['Cart'],
+    }),
   }),
 });
 
@@ -107,5 +117,6 @@ export const {
   useGetUserDetailsQuery,
   useUpdateUserMutation,
   useAddToCartMutation,
-  useGetCartDetailsQuery
+  useGetCartDetailsQuery,
+  useDeleteCartMutation
 } = usersApiSlice;

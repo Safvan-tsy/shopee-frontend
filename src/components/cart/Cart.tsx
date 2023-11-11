@@ -1,20 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
-import { Image, Form, Button } from 'react-bootstrap'
+import { Image, Form, Button, Alert } from 'react-bootstrap'
 import { RootState } from '../../store';
 import { FaTrash } from 'react-icons/fa';
 import './cart.css'
+import { useDeleteCartMutation } from '../../slices/usersApiSlice';
+import { toast } from 'react-toastify';
+import { useCreateOrderMutation } from '../../slices/ordersApiSlice';
+import Loader from '../ui/loader/Loader';
+import { OrderType } from '../../types/product.types';
 
 const Cart = ({ cart }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state.auth.token);
 
+  const [error, setError] = useState(false);
   const [address, setAddress] = useState('')
   const [district, setDistrict] = useState('')
   const [pincode, setPincode] = useState('')
   const [totalTax, setTotalTax] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
+  const [deleteCart, { isLoading, error: deleteCartError }] = useDeleteCartMutation()
+  const [createOrder, { isLoading: loadingCheckout, error: errorCheckout }] = useCreateOrderMutation()
 
   useEffect(() => {
     let tax = 0;
@@ -29,10 +38,59 @@ const Cart = ({ cart }) => {
     setTotalShipping(shipping);
   }, [cart]);
 
+  const addressValidate = () => {
+    if (
+      !address ||
+      !district ||
+      !pincode
+    ) {
+      setError(true)
+      return false
+    } else {
+      setError(false)
+      return true
+    }
+  }
 
-  const token = useSelector((state: RootState) => state.auth.token);
-  const checkoutHandler = () => { navigate('/login?redirect=/shipping') }
+  const checkoutHandler = async (cart) => {
+    try {
 
+      if (addressValidate()) {
+        let data: OrderType = { ...cart }
+        data.shippingAddress = {
+          address: address,
+          city: district,
+          postalCode: pincode,
+          state: "Kerala",
+          country: "India"
+        }
+        await createOrder({ data, token }).unwrap()
+
+        if (errorCheckout) {
+          console.log(errorCheckout, "errorCheckout")
+          toast.error('Error occured')
+        } else {
+          let cartId = cart._id
+          await deleteCart({ cartId, token })
+        }
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      toast.error('Error occured')
+    }
+  }
+  const deleteHandler = async (cartId: string) => {
+    if (window.confirm('Are you sure')) {
+      try {
+        await deleteCart({ cartId, token })
+        toast.success('Deleted');
+      } catch (error) {
+        toast.error('Error occured')
+      }
+    }
+  }
   return (
     <table className='mb-2'>
       <thead>
@@ -83,13 +141,25 @@ const Cart = ({ cart }) => {
           <td data-label="Actions" className='item-td'>
             <div className="items">
               <div className="items__title cart-actions">
-                <Button variant='success' onClick={checkoutHandler}>Checkout</Button>
-                <Button variant='danger'><FaTrash/></Button>
+                {
+                  loadingCheckout ? (<Loader />)
+                    : (<Button variant='success' onClick={() => checkoutHandler(cart)}>Place Order</Button>)
+                }
+                {isLoading ? (<Loader />) : (
+                  <Button variant='danger' onClick={() => deleteHandler(cart._id)}><FaTrash /></Button>
+                )}
               </div>
             </div>
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            {error && <Alert variant='danger'>Please fill All Fields</Alert>}
+          </td>
+        </tr>
+      </tfoot>
     </table>
   );
 }

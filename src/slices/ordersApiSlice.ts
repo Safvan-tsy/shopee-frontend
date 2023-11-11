@@ -1,30 +1,21 @@
 import { apiSlice } from './apiSlice';
 import { ORDERS_URL } from '../utils/constants';
-import { CartItem, orderType } from '../types/product.types';
+import { CartItem, OrderType } from '../types/product.types';
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createOrder: builder.mutation<{data:{order:orderType}}, { 
-      orderItems: CartItem[]; 
-      shippingAddress: any; 
-      paymentMethod: string; 
-      itemsPrice: string; 
-      shippingPrice: string; 
-      taxPrice: string; 
-      totalPrice: string; 
-      token: string; 
-  }>({
-      query: (order) => ({
+    createOrder: builder.mutation<{status:string,order:any}, {data:OrderType,token:string}>({
+      query: ({data,token}) => ({
         url: ORDERS_URL,
         method: 'POST',
-        body: { ...order },
+        body: data,
         headers: {
-          Authorization: `Bearer ${order.token}`,
+          Authorization: `Bearer ${token}`,
         },
       }),
     }),
 
-    getOrderDetails: builder.query<{ data:{order:orderType} }, { orderId: string; token: string }>({
+    getOrderDetails: builder.query<{ data:{order:OrderType} }, { orderId: string; token: string }>({
       query: ({ orderId, token }) => ({
         url: `${ORDERS_URL}/${orderId}`,
         headers: {
@@ -54,7 +45,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getMyOrders: builder.query<{ orders: orderType[] }, string>({
+    getMyOrders: builder.query<{ orders: OrderType[] }, string>({
       query: (token) => ({
         url: `${ORDERS_URL}/mine`,
         headers: {

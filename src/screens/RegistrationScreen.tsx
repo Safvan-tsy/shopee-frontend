@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import FormContainer from '../../components/ui/FormContainer';
+import FormContainer from '../components/ui/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../../components/ui/loader/Loader';
-import { useRegistrationMutation } from '../../slices/sellersApiSlice';
+import Loader from '../components/ui/loader/Loader';
+import { useRegistrationMutation } from '../slices/sellersApiSlice';
 import { toast } from 'react-toastify';
-import { setCredentials } from '../../slices/authSlice';
-import { RootState } from '../../store';
+import { setCredentials } from '../slices/authSlice';
+import { RootState } from '../store';
 
 const RegistrationScreen = () => {
     const [pan, setPan] = useState('');
