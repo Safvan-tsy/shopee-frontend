@@ -113,7 +113,7 @@ console.log(res)
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
   {res.orders.map((order) => {
     return (
       <tr key={order._id}>
@@ -142,7 +142,7 @@ console.log(res)
       </tr>
     );
   })}
-</tbody>
+</tbody> */}
         </Table>
       )}
     </Col>
