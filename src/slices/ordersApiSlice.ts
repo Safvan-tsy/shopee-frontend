@@ -45,8 +45,8 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getMyOrders: builder.query<{ orders: OrderType[] }, string>({
-      query: (token) => ({
+    getMyOrders: builder.query<{ orders: OrderType[] }, {token:string}>({
+      query: ({token}) => ({
         url: `${ORDERS_URL}/mine`,
         headers: {
           Authorization: `Bearer ${token}`,
