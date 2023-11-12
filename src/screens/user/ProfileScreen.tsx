@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { FaTimes ,FaGratipay} from 'react-icons/fa'
+import { FaTimes, FaGratipay } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../../components/ui/Message';
@@ -10,6 +10,9 @@ import { useProfileMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import { useGetMyOrdersQuery } from '../../slices/ordersApiSlice';
 import { RootState } from '../../store';
+import { OrderType } from '../../types/product.types';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import Order from '../../components/order/Order';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('')
@@ -18,11 +21,19 @@ const ProfileScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state:RootState) => state.auth);
-  const token = useSelector((state:RootState) => state.auth.token)
-  const [updateProfile,{error:errorUpdate}] = useProfileMutation()
-  const { data: res, isLoading, error } = useGetMyOrdersQuery({token});
-console.log(res)
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const token = useSelector((state: RootState) => state.auth.token)
+  const [updateProfile, { error: errorUpdate }] = useProfileMutation()
+  const { data: orderDetails, isLoading, error } = useGetMyOrdersQuery({ token });
+  const [order, setOrder] = useState<OrderType[]>([]);
+
+  useDocumentTitle('My Profile| Shorpee', false);
+  useEffect(() => {
+    if (orderDetails) {
+      setOrder(orderDetails.orders);
+    }
+  }, [orderDetails]);
+
   useEffect(() => {
     if (userInfo) {
       setName(userInfo.name);
@@ -98,52 +109,11 @@ console.log(res)
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>
-          Error
-        </Message>
+        <Message>Error: Try Again</Message>
+      ) : order.length < 1 ? (
+        <Message>No Orders Found</Message>
       ) : (
-        <Table striped hover responsive className='table-sm'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th></th>
-            </tr>
-          </thead>
-          {/* <tbody>
-  {res.orders.map((order) => {
-    return (
-      <tr key={order._id}>
-        <td>{order._id}</td>
-        <td>{order.createdAt.substring(0, 10)}</td>
-        <td>{order.totalPrice}</td>
-        <td>
-          {order.isPaid ? (
-            <FaGratipay style={{ color: 'green' }}/>
-          ) : (
-            <FaTimes style={{ color: 'red' }} />
-          )}
-        </td>
-        <td>
-          {order.isDelivered ? (
-            <FaGratipay style={{ color: 'green' }}/>
-          ) : (
-            <FaTimes style={{ color: 'red' }} />
-          )}
-        </td>
-        <td>
-          <LinkContainer to={`/order/${order._id}`}>
-            <Button>Details</Button>
-          </LinkContainer>
-        </td>
-      </tr>
-    );
-  })}
-</tbody> */}
-        </Table>
+        order.map((item: OrderType) => <Order order={item} key={item._id} />)
       )}
     </Col>
   </Row>

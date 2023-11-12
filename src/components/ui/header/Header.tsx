@@ -49,11 +49,6 @@ const Header: React.FC = () => {
                 <LinkContainer to="/cart" className="header-cart-btn">
                   <Nav.Link>
                     <FaShoppingCart /> Cart
-                    {cartItems.length > 0 && (
-                      <Badge pill bg="danger" style={{ marginLeft: '5px' }}>
-                        {cartItems.reduce((a, c) => a + c.qty, 0)}
-                      </Badge>
-                    )}
                   </Nav.Link>
                 </LinkContainer>
                 {userInfo ? (

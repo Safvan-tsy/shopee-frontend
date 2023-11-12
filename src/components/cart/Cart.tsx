@@ -64,8 +64,7 @@ const Cart = ({ cart }) => {
           state: "Kerala",
           country: "India"
         }
-        await createOrder({ data, token }).unwrap()
-
+        const res = await createOrder({ data, token }).unwrap()
         if (errorCheckout) {
           console.log(errorCheckout, "errorCheckout")
           toast.error('Error occured')

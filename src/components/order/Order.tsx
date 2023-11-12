@@ -1,9 +1,7 @@
-import { Link} from 'react-router-dom';
-import { Image, Form, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+import { Image, Form, Button } from 'react-bootstrap'
 
-import { OrderType } from '../../types/product.types';
-
-const Order = ({order}) => {
+const Order = ({ order }) => {
 
   return (
     <table className='mb-2'>
@@ -11,9 +9,8 @@ const Order = ({order}) => {
         <tr>
           <th scope="col">Items</th>
           <th scope="col">SHIPPING ADDRESS</th>
-          <th scope="col">₹ Breakdown</th>
           <th scope="col">Total(₹)</th>
-          <th scope="col">Actions</th>
+          <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -30,25 +27,15 @@ const Order = ({order}) => {
           </td>
           <td data-label="Address">
             <Form>
-              <Form.Control type='text'
-                placeholder="Enter address"
-                value={order.shippingAddress.address}>
-              </Form.Control>
-              <Form.Control type='text'
-                placeholder="Enter District"
-                value={order.shippingAddress.city}>
-              </Form.Control>
-              <Form.Control type='text'
-                placeholder="Enter Pincode"
-                value={order.shippingAddress.postalCode}>
-              </Form.Control>
+              <Form.Text >{order.shippingAddress.address}</Form.Text><br />
+              <Form.Text >{order.shippingAddress.city}</Form.Text><br />
+              <Form.Text >{order.shippingAddress.postalCode}</Form.Text>
             </Form>
           </td>
           <td data-label="₹Total">
             {order.cartTotal}
           </td>
-          <td data-label="Total(₹)">{order.cartTotal}</td>
-          <td data-label="Actions" className='item-td'>
+          <td data-label="Status" className='item-td'>
             <div className="items">
               <div className="items__title cart-actions">
                 <Button disabled>{order.status}</Button>
