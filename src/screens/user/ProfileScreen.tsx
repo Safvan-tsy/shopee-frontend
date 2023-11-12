@@ -21,7 +21,7 @@ const ProfileScreen = () => {
   const { userInfo } = useSelector((state:RootState) => state.auth);
   const token = useSelector((state:RootState) => state.auth.token)
   const [updateProfile,{error:errorUpdate}] = useProfileMutation()
-  const { data: res, isLoading, error } = useGetMyOrdersQuery(token);
+  const { data: res, isLoading, error } = useGetMyOrdersQuery({token});
 console.log(res)
   useEffect(() => {
     if (userInfo) {

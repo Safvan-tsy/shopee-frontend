@@ -16,20 +16,6 @@ export interface ProductType {
 }
 
 
-export interface CartItem {
-    _id:string;
-    name:string;
-    price:number;
-    qty:number;
-    countInStock: number;
-    product?: string;
-    totalPrice?: string; 
-    taxPrice?:string;
-    shippingPrice?:string;
-    itemsPrice?:string;
-    image?:string;
-  }
-
 export interface OrderType{
     userId: string;
     sellerId: string;
@@ -56,6 +42,7 @@ export interface OrderType{
         state: string;
         country: string
     };
+    _id?:string;
     paymentMethod?: string;
     isPaid?: boolean;
     paidAt?: Date;
@@ -88,6 +75,7 @@ export interface CartItem {
         state:string;
         country: string
     };
+    _id?:string;
     paymentMethod?: string;
     cartTotal: number;
     isPaid?: boolean;
